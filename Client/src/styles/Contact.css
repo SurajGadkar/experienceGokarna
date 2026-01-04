@@ -1,37 +1,41 @@
 @import "tailwindcss";
 
-/* Uses your theme vars (fallbacks included) */
+/* Theme vars */
 :root {
   --hero-overlay: rgba(6, 28, 37, 0.55);
   --nav-bg: rgba(6, 28, 37, 0.85);
+
   --sand-beige: #FEFCBF;
   --turquoise-sea: #0BA37F;
   --ocean-navy: #0F172A;
   --sand-white: #FCFCFC;
+
+  /* Optional: if you use text-gradient elsewhere */
+  --hero-gradient: linear-gradient(135deg, var(--turquoise-sea) 0%, #0369A1 55%, var(--ocean-navy) 100%);
 }
 
-/* Keep this - matches navbar text readability */
+/* Matches navbar readability */
 .text-shadow-navbar {
   text-shadow: 0 2px 8px rgba(6, 28, 37, 0.85);
 }
 
-/* ---------- Page shell cards (clean glass) ---------- */
-/* Glassmorphism: transparency + blur + soft border + soft shadow [web:66][web:81] */
+/* ---------- Light glass containers (Activities-style) ---------- */
 .glass-card {
-  background: rgba(6, 28, 37, 0.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(252, 252, 252, 0.65);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(254, 252, 191, 0.35);
   border-radius: 24px;
-  box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.18);
+  animation: fadeUp 220ms ease-out;
 }
 
-/* A slightly tighter two-column feel */
+/* layout helper */
 .contact-shell {
   align-items: start;
 }
 
-/* ---------- Contact cards (info items) ---------- */
+/* ---------- Contact cards (clean, light) ---------- */
 .contact-card {
   display: flex;
   gap: 14px;
@@ -40,19 +44,22 @@
   padding: 14px 14px;
   border-radius: 18px;
 
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(252, 252, 252, 0.72);
+  border: 1px solid rgba(254, 252, 191, 0.30);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
 
-  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
   text-decoration: none;
+
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
 }
 
 .contact-card:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(11, 163, 127, 0.35);
+  box-shadow: 0 22px 48px rgba(11, 163, 127, 0.16);
+  border-color: rgba(11, 163, 127, 0.25);
+  background: rgba(252, 252, 252, 0.78);
 }
 
 .contact-card__icon {
@@ -62,119 +69,117 @@
   display: grid;
   place-items: center;
 
-  background: rgba(254, 252, 191, 0.10);
-  border: 1px solid rgba(254, 252, 191, 0.18);
+  background: rgba(254, 252, 191, 0.70);
+  border: 1px solid rgba(254, 252, 191, 0.55);
 
   font-size: 20px;
-  color: var(--sand-beige);
+  color: var(--ocean-navy);
 }
 
 .contact-card__title {
-  font-weight: 800;
-  color: rgba(254, 252, 191, 0.95);
+  font-weight: 900;
+  color: rgba(15, 23, 42, 0.92);
   line-height: 1.1;
 }
 
 .contact-card__detail {
   margin-top: 2px;
-  color: rgba(254, 252, 191, 0.75);
-  font-weight: 600;
+  color: rgba(15, 23, 42, 0.72);
+  font-weight: 700;
   font-size: 0.95rem;
   line-height: 1.2;
 }
 
-/* ---------- Form inputs (clean, not heavy) ---------- */
+/* ---------- Form inputs (light, clean) ---------- */
 .form-input {
   width: 100%;
   border-radius: 16px;
   padding: 12px 14px;
 
-  background: rgba(252, 252, 252, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: rgba(254, 252, 191, 0.92);
+  background: rgba(252, 252, 252, 0.80);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  color: rgba(15, 23, 42, 0.90);
 
   outline: none;
   transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .form-input::placeholder {
-  color: rgba(254, 252, 191, 0.55);
+  color: rgba(15, 23, 42, 0.55);
   font-weight: 600;
 }
 
 .form-input:focus {
-  border-color: rgba(11, 163, 127, 0.55);
+  border-color: rgba(11, 163, 127, 0.45);
   box-shadow: 0 0 0 4px rgba(11, 163, 127, 0.14);
-  background: rgba(252, 252, 252, 0.13);
+  background: rgba(252, 252, 252, 0.92);
 }
 
 .form-textarea {
   resize: none;
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons (same as Activities pills) ---------- */
 .btn-primary {
   background: var(--sand-beige);
   color: var(--ocean-navy);
-  border: 1px solid rgba(15, 23, 42, 0.20);
+  border: 1px solid rgba(15, 23, 42, 0.18);
   border-radius: 18px;
 
   padding: 12px 16px;
   font-weight: 900;
 
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
   transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
   filter: brightness(1.02);
-  box-shadow: 0 18px 36px rgba(0,0,0,0.30);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.20);
 }
 
 .btn-primary--wide {
   width: 100%;
 }
 
-/* ---------- Status pill ---------- */
+/* ---------- Status pill (clean) ---------- */
 .status-pill {
   padding: 12px 14px;
   border-radius: 16px;
-  background: rgba(11, 163, 127, 0.14);
-  border: 1px solid rgba(11, 163, 127, 0.30);
-  color: rgba(254, 252, 191, 0.92);
-  font-weight: 800;
+  background: rgba(11, 163, 127, 0.12);
+  border: 1px solid rgba(11, 163, 127, 0.22);
+  color: rgba(15, 23, 42, 0.88);
+  font-weight: 900;
 }
 
-/* ---------- Quick links ---------- */
+/* ---------- Quick links (light) ---------- */
 .quick-link {
   display: grid;
   place-items: center;
   height: 46px;
   border-radius: 16px;
 
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(252, 252, 252, 0.72);
+  border: 1px solid rgba(254, 252, 191, 0.30);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.10);
 
-  color: rgba(254, 252, 191, 0.92);
-  font-weight: 800;
+  color: rgba(15, 23, 42, 0.88);
+  font-weight: 900;
   text-decoration: none;
 
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
 .quick-link:hover {
   transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(254, 252, 191, 0.25);
+  background: rgba(252, 252, 252, 0.80);
+  box-shadow: 0 18px 34px rgba(11, 163, 127, 0.14);
+  border-color: rgba(11, 163, 127, 0.22);
 }
 
 /* ---------- Optional subtle animation ---------- */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-.glass-card {
-  animation: fadeUp 220ms ease-out;
 }
