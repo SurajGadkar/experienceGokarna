@@ -1,45 +1,180 @@
-/* Add to your existing Contact.css */
+@import "tailwindcss";
+
+/* Uses your theme vars (fallbacks included) */
+:root {
+  --hero-overlay: rgba(6, 28, 37, 0.55);
+  --nav-bg: rgba(6, 28, 37, 0.85);
+  --sand-beige: #FEFCBF;
+  --turquoise-sea: #0BA37F;
+  --ocean-navy: #0F172A;
+  --sand-white: #FCFCFC;
+}
+
+/* Keep this - matches navbar text readability */
 .text-shadow-navbar {
   text-shadow: 0 2px 8px rgba(6, 28, 37, 0.85);
 }
 
+/* ---------- Page shell cards (clean glass) ---------- */
+/* Glassmorphism: transparency + blur + soft border + soft shadow [web:66][web:81] */
+.glass-card {
+  background: rgba(6, 28, 37, 0.55);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+}
+
+/* A slightly tighter two-column feel */
+.contact-shell {
+  align-items: start;
+}
+
+/* ---------- Contact cards (info items) ---------- */
 .contact-card {
-  background: rgba(252, 252, 252, 0.95);
-  backdrop-filter: blur(15px);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+
+  padding: 14px 14px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+  text-decoration: none;
 }
 
 .contact-card:hover {
-  background: rgba(254, 252, 191, 0.98);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(11, 163, 127, 0.35);
 }
 
+.contact-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(254, 252, 191, 0.10);
+  border: 1px solid rgba(254, 252, 191, 0.18);
+
+  font-size: 20px;
+  color: var(--sand-beige);
+}
+
+.contact-card__title {
+  font-weight: 800;
+  color: rgba(254, 252, 191, 0.95);
+  line-height: 1.1;
+}
+
+.contact-card__detail {
+  margin-top: 2px;
+  color: rgba(254, 252, 191, 0.75);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+/* ---------- Form inputs (clean, not heavy) ---------- */
 .form-input {
-  background: rgba(252, 252, 191, 0.9) !important;
-  color: var(--ocean-navy) !important;
-  border-color: rgba(254, 252, 191, 0.6);
+  width: 100%;
+  border-radius: 16px;
+  padding: 12px 14px;
+
+  background: rgba(252, 252, 252, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(254, 252, 191, 0.92);
+
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .form-input::placeholder {
-  color: rgba(15, 23, 42, 0.6) !important;
+  color: rgba(254, 252, 191, 0.55);
+  font-weight: 600;
 }
 
+.form-input:focus {
+  border-color: rgba(11, 163, 127, 0.55);
+  box-shadow: 0 0 0 4px rgba(11, 163, 127, 0.14);
+  background: rgba(252, 252, 252, 0.13);
+}
+
+.form-textarea {
+  resize: none;
+}
+
+/* ---------- Buttons ---------- */
 .btn-primary {
-  background: linear-gradient(135deg, var(--sand-beige), #FDF4B3) !important;
-  color: var(--ocean-navy) !important;
-  border: 2px solid rgba(15, 23, 42, 0.2);
+  background: var(--sand-beige);
+  color: var(--ocean-navy);
+  border: 1px solid rgba(15, 23, 42, 0.20);
+  border-radius: 18px;
+
+  padding: 12px 16px;
+  font-weight: 900;
+
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
 }
 
-.tips-backdrop {
-  background: rgba(254, 252, 191, 0.15);
-  border: 3px solid rgba(254, 252, 191, 0.4);
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.30);
 }
 
-.tips-backdrop:hover {
-  background: rgba(254, 252, 191, 0.25);
+.btn-primary--wide {
+  width: 100%;
 }
 
-/* Navbar matching backdrop for sections */
-.section-backdrop {
-  background: rgba(6, 28, 37, 0.85);
-  backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid rgba(254, 252, 191, 0.2);
+/* ---------- Status pill ---------- */
+.status-pill {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(11, 163, 127, 0.14);
+  border: 1px solid rgba(11, 163, 127, 0.30);
+  color: rgba(254, 252, 191, 0.92);
+  font-weight: 800;
+}
+
+/* ---------- Quick links ---------- */
+.quick-link {
+  display: grid;
+  place-items: center;
+  height: 46px;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  color: rgba(254, 252, 191, 0.92);
+  font-weight: 800;
+  text-decoration: none;
+
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.quick-link:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(254, 252, 191, 0.25);
+}
+
+/* ---------- Optional subtle animation ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.glass-card {
+  animation: fadeUp 220ms ease-out;
 }
