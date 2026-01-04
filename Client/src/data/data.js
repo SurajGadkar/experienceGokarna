@@ -196,3 +196,12 @@ export const contactInfo = [
     }
   ];
 
+export const socialLinks = [
+    { icon: '📘', label: 'Facebook', href: 'https://facebook.com/gokarnaadventures', color: 'from-blue-600 to-blue-800' },
+    { icon: '📷', label: 'Instagram', href: 'https://instagram.com/gokarnaadventures', color: 'from-pink-500 to-purple-600' },
+    { icon: '🐦', label: 'X', href: 'https://twitter.com/gokarnaadventures', color: 'from-sky-400 to-blue-500' },
+    { icon: '📱', label: 'WhatsApp', href: 'https://wa.me/919876543210', color: 'from-green-500 to-emerald-600' },
+    { icon: '📍', label: 'Maps', href: 'https://maps.google.com/?q=Gokarna', color: 'from-red-500 to-orange-500' },
+    { icon: '🎥', label: 'YouTube', href: 'https://youtube.com/@gokarnaadventures', color: 'from-red-600 to-red-800' }
+  ];
+

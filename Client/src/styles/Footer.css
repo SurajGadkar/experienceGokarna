@@ -1,0 +1,57 @@
+
+/* NAVBAR IDENTICAL */
+.navbar-bg-footer {
+  background: rgba(6, 28, 37, 0.85);
+  backdrop-filter: blur(25px) saturate(180%);
+}
+
+.shadow-navbar {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.drop-shadow-navbar {
+  filter: drop-shadow(0 2px 8px rgba(6, 28, 37, 0.85));
+}
+
+.text-shadow-navbar {
+  text-shadow: 0 2px 8px rgba(6, 28, 37, 0.85);
+}
+
+/* Social - SAND-BEIGE text/icons */
+.social-btn {
+  color: var(--sand-beige) !important;
+  background: rgba(252, 252, 252, 0.15) !important;
+  border-color: rgba(254, 252, 191, 0.5) !important;
+  backdrop-filter: blur(15px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-btn:hover {
+  background: rgba(254, 252, 191, 0.4) !important;
+  color: var(--sand-beige) !important;
+  transform: scale(1.08);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* Ensure ALL text is sand-beige */
+.footer-container * {
+  color: var(--sand-beige) !important;
+}
+
+.footer-container a {
+  color: var(--sand-beige) !important;
+}
+
+.footer-container a:hover {
+  color: #FEFCBF !important; /* Full opacity sand-beige */
+}
+
+/* Compact responsive */
+@media (max-width: 640px) {
+  .footer-container { height: 170px; }
+  .social-btn { width: 2.5rem; height: 2.5rem; font-size: 0.875rem; }
+}
+
+@media (min-width: 768px) {
+  .footer-container { height: 200px; }
+}

@@ -5,6 +5,7 @@ import Beaches from "./components/Beaches.jsx";
 import Temples from "./components/Temples.jsx";
 import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
+import Footer from "./components/Footer.jsx";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           
         </Routes>
       </main>
+      <Footer />
     </>
   );
 }
