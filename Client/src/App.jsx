@@ -6,6 +6,7 @@ import Temples from "./components/Temples.jsx";
 import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
+import Activities from "./components/Activities.jsx";
 import "./App.css";
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
           <Route path="/temples" element={<Temples />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          
+          <Route path="/activities" element={<Activities />} />
         </Routes>
       </main>
       <Footer />

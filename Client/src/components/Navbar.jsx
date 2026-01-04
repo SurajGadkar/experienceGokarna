@@ -70,8 +70,8 @@ function Navbar() {
           <Link to="/temples" className="hover:text-indigo-300 font-medium">
             Temples
           </Link>
-          <Link to="/about-us" className="hover:text-indigo-300 font-medium">
-            About
+          <Link to="/activities" className="hover:text-indigo-300 font-medium">
+            Activities
           </Link>
         </div>
       </div>

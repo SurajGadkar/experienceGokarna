@@ -1,67 +1,144 @@
-/* Activity Cards - Enhanced theme */
+/* --- Lighter frosted surfaces (no light-black) --- */
+
+/* Main glass container (Tips + tabs background) */
+.glass-card {
+  background: rgba(252, 252, 252, 0.65);              /* sand-white glass */
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(254, 252, 191, 0.35);        /* sand-beige border */
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.18);     /* soft navy shadow */
+}
+
+/* Tabs shell (lighter + cleaner) */
+.tabs-shell {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px;
+  margin-bottom: 18px;
+
+  border-radius: 22px;
+  background: rgba(252, 252, 252, 0.60);
+  border: 1px solid rgba(254, 252, 191, 0.35);
+  backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.16);
+}
+
+/* Tab button (pill style, light) */
+.tab-btn {
+  background: rgba(254, 252, 191, 0.55);            /* sand-beige */
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  color: var(--ocean-navy);
+
+  font-weight: 900;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border-radius: 16px;
+
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.tab-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.tab-btn.is-active {
+  background: linear-gradient(135deg, rgba(11, 163, 127, 0.18), rgba(3, 105, 161, 0.14));
+  border-color: rgba(11, 163, 127, 0.35);
+  color: var(--ocean-navy);
+  box-shadow: 0 14px 32px rgba(11, 163, 127, 0.18);
+}
+
+/* Activity cards (light glass, premium) */
 .activity-card {
-  background: var(--sand-white);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(254, 252, 191, 0.3);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(252, 252, 252, 0.78);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(254, 252, 191, 0.35);
+  border-radius: 24px;
+  padding: 18px;
+
+  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.16);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+@media (min-width: 640px) {
+  .activity-card { padding: 22px; }
 }
 
 .activity-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 30px 60px -15px rgba(11, 163, 127, 0.3);
-  border-color: var(--turquoise-sea);
+  transform: translateY(-3px);
+  box-shadow: 0 26px 60px rgba(11, 163, 127, 0.18);
+  border-color: rgba(11, 163, 127, 0.30);
 }
 
-/* Buttons - Exact match to your .btn-primary */
-.btn-primary {
-  background: var(--sand-beige) !important;
-  color: var(--ocean-navy) !important;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  font-weight: 700;
-  padding: 1rem 2rem;
-  border-radius: 2rem;
-  border: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(254, 252, 191, 0.4);
+/* Card typography (now dark/navy like your original) */
+.activity-card__title {
+  color: var(--ocean-navy);
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1.2;
 }
 
-.btn-primary:hover {
+.activity-card__desc {
+  margin-top: 8px;
+  color: rgba(15, 23, 42, 0.78);
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.activity-card__listItem {
+  color: rgba(11, 163, 127, 0.95);  /* turquoise like earlier */
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+/* Chips look cleaner on light cards */
+.chip {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(252, 252, 252, 0.70);
+  color: rgba(15, 23, 42, 0.78);
+}
+
+.chip--money {
+  background: rgba(254, 252, 191, 0.70);
+  border-color: rgba(254, 252, 191, 0.60);
+  color: var(--ocean-navy);
+}
+
+/* Tips cards (light) */
+.tip-card {
+  border-radius: 22px;
+  padding: 18px;
+
+  background: rgba(252, 252, 252, 0.72);
+  border: 1px solid rgba(254, 252, 191, 0.30);
+  backdrop-filter: blur(14px) saturate(140%);
+
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.tip-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(254, 252, 191, 0.6);
+  box-shadow: 0 22px 48px rgba(11, 163, 127, 0.16);
+  border-color: rgba(11, 163, 127, 0.25);
 }
 
-.btn-primary.active {
-  outline: 4px solid rgba(11, 163, 127, 0.5);
-  box-shadow: 0 20px 40px rgba(11, 163, 127, 0.4);
+.tip-card__title {
+  color: var(--ocean-navy);
+  font-weight: 900;
+  font-size: 1.25rem;
 }
 
-/* Text gradient matching your design */
-.text-gradient {
-  background: var(--hero-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.tip-card__text {
+  margin-top: 10px;
+  color: rgba(11, 163, 127, 0.95);
+  font-weight: 800;
+  line-height: 1.6;
 }
-
-/* Tips section backdrop */
-.tips-backdrop {
-  background: rgba(254, 252, 191, 0.4);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(254, 252, 191, 0.5);
-}
-
-/* Responsive utilities */
-@media (min-width: 768px) {
-  .grid-cols-activities { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
-}
-
-/* Staggered animation delays */
-@keyframes staggeredSlide {
-  0%, 20% { opacity: 0; transform: translateY(-20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
