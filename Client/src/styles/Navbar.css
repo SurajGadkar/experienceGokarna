@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* Uses your existing variables from index.css if present */
+:root {
+  --nav-bg: rgba(6, 28, 37, 0.85);           /* navbar bg */
+  --nav-border: rgba(255, 255, 255, 0.10);  /* subtle border */
+  --nav-shadow: 0 8px 32px rgba(0,0,0,0.3);  /* navbar shadow */
+  --nav-text: var(--sand-beige, #FEFCBF);   /* sand beige */
+}
+
+/* NAVBAR: match your provided navbar styling */
+.navbar {
+  color: var(--nav-text);
+  background: var(--nav-bg);
+  backdrop-filter: blur(25px) saturate(180%);
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow);
+  transition: all 0.3s ease;
+}
+
+/* Mobile logo on RIGHT */
+.navbar-mobile-logo {
+  color: var(--nav-text);
+  font-weight: 800;
+  font-size: 1.05rem;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(6, 28, 37, 0.85);
+}
+
+/* ---------- Hamburger (sleek) ---------- */
+.navbar-hamburger {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.navbar-hamburger:active {
+  transform: scale(0.98);
+}
+
+.hamburger-line {
+  display: block;
+  height: 2px;
+  width: 20px;
+  border-radius: 999px;
+  background: var(--nav-text);
+  opacity: 0.95;
+  transition: transform 220ms ease, opacity 220ms ease, width 220ms ease;
+}
+
+/* Animate to X */
+.navbar-hamburger.is-open .line-1 {
+  transform: translateY(8px) rotate(45deg);
+}
+.navbar-hamburger.is-open .line-2 {
+  opacity: 0;
+  width: 14px;
+}
+.navbar-hamburger.is-open .line-3 {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ---------- Mobile menu overlay ---------- */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+/* Dark backdrop = same as navbar theme */
+.mobile-menu__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 28, 37, 0.72);
+  backdrop-filter: blur(18px);
+  border: 0;
+}
+
+/* Panel (compact, centered) */
+.mobile-menu__panel {
+  position: relative;
+  margin: 84px auto 0; /* below navbar */
+  width: min(92vw, 420px);
+  border-radius: 18px;
+  overflow: hidden;
+
+  background: rgba(6, 28, 37, 0.88); /* dark = navbar */
+  backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+}
+
+/* Header */
+.mobile-menu__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.mobile-menu__title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--nav-text);
+  letter-spacing: 0.3px;
+}
+
+.mobile-menu__close {
+  background: transparent;
+  border: 0;
+  color: rgba(254, 252, 191, 0.85);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 8px 10px;
+  border-radius: 12px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.mobile-menu__close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--nav-text);
+}
+
+/* Links (compact list) */
+.mobile-menu__links {
+  padding: 10px;
+}
+
+.mobile-menu__link {
+  display: block;
+  padding: 12px 12px;
+  border-radius: 14px;
+  color: rgba(254, 252, 191, 0.92);
+  font-weight: 700;
+  font-size: 0.98rem;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.mobile-menu__link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mobile-menu__link:active {
+  transform: scale(0.99);
+}
+
+/* Footer line (tiny) */
+.mobile-menu__footer {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(254, 252, 191, 0.70);
+  font-size: 0.8rem;
+}
+
+/* ---------- Animations ---------- */
+@keyframes mobileMenuIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.mobileMenuIn {
+  animation: mobileMenuIn 220ms ease-out;
+}
+
+/* Small screens: slightly smaller panel */
+@media (max-width: 360px) {
+  .mobile-menu__panel { width: 94vw; }
+  .navbar-mobile-logo { font-size: 1rem; }
+}
