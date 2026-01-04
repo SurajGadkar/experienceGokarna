@@ -36,7 +36,7 @@ function Navbar() {
     { to: "/contact", label: "Contact" },
     { to: "/beaches", label: "Beaches" },
     { to: "/temples", label: "Temples" },
-    { to: "/about-us", label: "About" }
+    { to: "/activities", label: "Activities" }
   ];
 
   return (
