@@ -1,0 +1,67 @@
+/* Activity Cards - Enhanced theme */
+.activity-card {
+  background: var(--sand-white);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(254, 252, 191, 0.3);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.activity-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px -15px rgba(11, 163, 127, 0.3);
+  border-color: var(--turquoise-sea);
+}
+
+/* Buttons - Exact match to your .btn-primary */
+.btn-primary {
+  background: var(--sand-beige) !important;
+  color: var(--ocean-navy) !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(254, 252, 191, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(254, 252, 191, 0.6);
+}
+
+.btn-primary.active {
+  outline: 4px solid rgba(11, 163, 127, 0.5);
+  box-shadow: 0 20px 40px rgba(11, 163, 127, 0.4);
+}
+
+/* Text gradient matching your design */
+.text-gradient {
+  background: var(--hero-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Tips section backdrop */
+.tips-backdrop {
+  background: rgba(254, 252, 191, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(254, 252, 191, 0.5);
+}
+
+/* Responsive utilities */
+@media (min-width: 768px) {
+  .grid-cols-activities { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+}
+
+/* Staggered animation delays */
+@keyframes staggeredSlide {
+  0%, 20% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }

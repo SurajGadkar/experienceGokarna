@@ -1,0 +1,45 @@
+/* Add to your existing Contact.css */
+.text-shadow-navbar {
+  text-shadow: 0 2px 8px rgba(6, 28, 37, 0.85);
+}
+
+.contact-card {
+  background: rgba(252, 252, 252, 0.95);
+  backdrop-filter: blur(15px);
+}
+
+.contact-card:hover {
+  background: rgba(254, 252, 191, 0.98);
+}
+
+.form-input {
+  background: rgba(252, 252, 191, 0.9) !important;
+  color: var(--ocean-navy) !important;
+  border-color: rgba(254, 252, 191, 0.6);
+}
+
+.form-input::placeholder {
+  color: rgba(15, 23, 42, 0.6) !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--sand-beige), #FDF4B3) !important;
+  color: var(--ocean-navy) !important;
+  border: 2px solid rgba(15, 23, 42, 0.2);
+}
+
+.tips-backdrop {
+  background: rgba(254, 252, 191, 0.15);
+  border: 3px solid rgba(254, 252, 191, 0.4);
+}
+
+.tips-backdrop:hover {
+  background: rgba(254, 252, 191, 0.25);
+}
+
+/* Navbar matching backdrop for sections */
+.section-backdrop {
+  background: rgba(6, 28, 37, 0.85);
+  backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(254, 252, 191, 0.2);
+}
