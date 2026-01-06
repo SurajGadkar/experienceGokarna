@@ -29,7 +29,7 @@ function App() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <i class="fab fa-whatsapp"></i>
+        <i className="fab fa-whatsapp"></i>
       </a>
       <Footer />
     </>

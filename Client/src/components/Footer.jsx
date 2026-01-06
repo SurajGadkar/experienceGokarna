@@ -25,7 +25,7 @@ const Footer = () => {
             {[
               { icon: '📘', href: 'https://facebook.com/gokarnaadventures' },
               { icon: '📷', href: 'https://instagram.com/gokarnaadventures' },
-              { icon: '📱', href: 'https://wa.me/919876543210' },
+              { icon: '📱', href: 'https://wa.me/9742781642' },
               { icon: '📍', href: 'https://maps.google.com/?q=Gokarna' }
             ].map((social, index) => (
               <a
@@ -49,9 +49,9 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs sm:text-sm text-sand-beige/90 drop-shadow-sm">
           {/* Contact - Sand-beige only */}
           <div className="contact-mini flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-4 text-center sm:text-left order-2 sm:order-1">
-            <a href="mailto:gokarnaadventures@gmail.com" className="hover:text-sand-beige/100 transition-all hover:underline text-sand-beige/90">📧 info@gokarna.in</a>
+            <a href="mailto:experiencegokarna@gmail.com" className="hover:text-sand-beige/100 transition-all hover:underline text-sand-beige/90">📧 experiencegokarna@gmail.com</a>
             <span className="hidden sm:inline text-sand-beige/60">•</span>
-            <a href="tel:+919876543210" className="hover:text-sand-beige/100 transition-all hover:underline text-sand-beige/90">📞 +91 98765 43210</a>
+            <a href="tel:+919742781642" className="hover:text-sand-beige/100 transition-all hover:underline text-sand-beige/90">📞 +91 97427 81642</a>
           </div>
           
           {/* Copyright - Sand-beige */}
@@ -60,7 +60,7 @@ const Footer = () => {
               © 2026 Gokarna Adventures
             </p>
             <p className="text-sand-beige/80 text-xs leading-tight mt-0.5">
-              Sirsi, Karnataka 🌊
+              Made with ❤️ in Sirsi, Karnataka.
             </p>
           </div>
         </div>
