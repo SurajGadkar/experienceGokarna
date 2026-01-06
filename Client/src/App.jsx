@@ -23,6 +23,14 @@ function App() {
           <Route path="/activities" element={<Activities />} />
         </Routes>
       </main>
+      <a
+        href="https://wa.me/9742781642"
+        class="whatsapp-float"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="fab fa-whatsapp"></i>
+      </a>
       <Footer />
     </>
   );
