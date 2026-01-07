@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import "../styles/Plantrip.css"; // ✅ component-scoped stylesheet
 
 const PLAN_TILES = [
-  { id: "1n-2d", label: "1N 2D", accent: "plan-tile--teal" },
-  { id: "2n-3d", label: "2N 3D", accent: "plan-tile--sky" },
-  { id: "3n-4d", label: "3N 4D", accent: "plan-tile--indigo" },
-  { id: "4n-5d", label: "4N 5D", accent: "plan-tile--slate" },
-  { id: "weekend", label: "Weekend", accent: "plan-tile--amber" },
-  { id: "relaxed", label: "Relaxed", accent: "plan-tile--rose" },
+  { id: "mini", label: "1N 2D" },
+  { id: "short", label: "2N 3D" },
+  { id: "classic", label: "3N 4D" },
+  { id: "long", label: "4N 5D" },
+  { id: "weekend", label: "Weekend" },
+  { id: "relaxed", label: "Relaxed" },
 ];
 
 export default function PlanTrip() {
@@ -29,7 +29,7 @@ export default function PlanTrip() {
           {PLAN_TILES.map((tile) => (
             <li key={tile.id} className="list-none">
               <Link
-                to={`/plan/${tile.id}`}
+                to={`/plan-trip/${tile.id}`}
                 data-id={tile.id}
                 aria-label={`Select ${tile.label}`}
                 className={[

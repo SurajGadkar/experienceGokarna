@@ -10,6 +10,7 @@ import Activities from "./components/Activities.jsx";
 import "./App.css";
 import FloatingMapButton from "./components/FloatingButton.jsx";
 import PlanTrip from "./components/PlanTrip.jsx";
+import Trip from "./components/Trip.jsx";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/plan-trip" element={<PlanTrip />} />
+          <Route path="/plan-trip/:planId" element={<Trip />} />
         </Routes>
       </main>
       <a

@@ -26,10 +26,10 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         {/* Page header */}
         <div className="mb-10 sm:mb-12">
-          <h1 className="text-3xl sm:text-4xl font-black text-sand-beige text-shadow-navbar tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-black text-shadow-navbar tracking-tight">
             Contact
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-sand-beige/80">
+          <p className="mt-2 text-sm sm:text-base text-black">
             Ask about stays, trekking, beach activities, routes, or a custom plan.
           </p>
         </div>
@@ -38,10 +38,10 @@ const Contact = () => {
         <div className="contact-shell grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
           {/* Contact info */}
           <section className="glass-card p-6 sm:p-8">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-sand-beige text-shadow-navbar">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-black text-shadow-navbar">
               Contact details
             </h2>
-            <p className="mt-2 text-sm text-sand-beige/75">
+            <p className="mt-2 text-sm text-black/75">
               Reach out via email/phone, or use the form.
             </p>
 
@@ -66,10 +66,10 @@ const Contact = () => {
 
           {/* Form */}
           <section className="glass-card p-6 sm:p-8">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-sand-beige text-shadow-navbar">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-black text-shadow-navbar">
               Send a message
             </h2>
-            <p className="mt-2 text-sm text-sand-beige/75">
+            <p className="mt-2 text-sm text-black/75">
               Share dates, group size, and what you want to do.
             </p>
 
@@ -133,7 +133,7 @@ const Contact = () => {
 
         {/* Quick links */}
         <section className="glass-card mt-10 sm:mt-12 p-6 sm:p-8">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-sand-beige text-shadow-navbar text-center">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-black text-shadow-navbar text-center">
             Quick links
           </h2>
 
