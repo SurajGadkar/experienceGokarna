@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520" viewBox="0 0 520 520">
+  <defs>
+    <linearGradient id="ocean" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#14b8a6" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#1e3a8a" stop-opacity="0.20"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <rect width="520" height="520" fill="#f7fafc"/>
+  <rect width="520" height="520" fill="url(#ocean)"/>
+
+  <!-- abstract coastlines -->
+  <path d="M35,120 C120,40 210,55 265,95 C325,140 405,145 485,95" fill="none" stroke="#94a3b8" stroke-opacity="0.35" stroke-width="18" stroke-linecap="round"/>
+  <path d="M20,200 C125,135 205,140 265,185 C335,240 420,255 500,200" fill="none" stroke="#38bdf8" stroke-opacity="0.20" stroke-width="14" stroke-linecap="round"/>
+  <path d="M25,300 C115,250 210,250 280,295 C350,340 410,360 495,335" fill="none" stroke="#2dd4bf" stroke-opacity="0.22" stroke-width="16" stroke-linecap="round"/>
+  <path d="M35,400 C140,330 240,330 305,375 C375,420 430,445 495,430" fill="none" stroke="#60a5fa" stroke-opacity="0.18" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- dotted route path -->
+  <path d="M95,420 C165,365 210,330 265,295 C330,255 385,235 445,205" fill="none" stroke="#0f172a" stroke-opacity="0.16" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14" filter="url(#soft)"/>
+
+  <!-- pins -->
+  <g fill="none" stroke="#0f172a" stroke-opacity="0.25" stroke-width="3">
+    <path d="M180 250c0 18-20 40-20 40s-20-22-20-40a20 20 0 1 1 40 0z" fill="#fff" fill-opacity="0.55"/>
+    <circle cx="160" cy="250" r="6" fill="#0ea5e9" fill-opacity="0.65" stroke="none"/>
+
+    <path d="M365 215c0 18-20 40-20 40s-20-22-20-40a20 20 0 1 1 40 0z" fill="#fff" fill-opacity="0.55"/>
+    <circle cx="345" cy="215" r="6" fill="#14b8a6" fill-opacity="0.65" stroke="none"/>
+
+    <path d="M265 330c0 18-20 40-20 40s-20-22-20-40a20 20 0 1 1 40 0z" fill="#fff" fill-opacity="0.55"/>
+    <circle cx="245" cy="330" r="6" fill="#60a5fa" fill-opacity="0.65" stroke="none"/>
+  </g>
+
+  <!-- subtle grid -->
+  <g stroke="#0f172a" stroke-opacity="0.05" stroke-width="1">
+    <path d="M0 65H520"/><path d="M0 130H520"/><path d="M0 195H520"/><path d="M0 260H520"/><path d="M0 325H520"/><path d="M0 390H520"/><path d="M0 455H520"/>
+    <path d="M65 0V520"/><path d="M130 0V520"/><path d="M195 0V520"/><path d="M260 0V520"/><path d="M325 0V520"/><path d="M390 0V520"/><path d="M455 0V520"/>
+  </g>
+</svg>

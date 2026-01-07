@@ -1,0 +1,57 @@
+.circular-image-button {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    overflow: hidden;
+    background-color: #fff; /* Optional: add background if needed */
+}
+
+.circular-image-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.circular-image-button__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tooltip styling (appears on hover) */
+.circular-image-button__tooltip {
+    position: absolute;
+    left: 70px;
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.circular-image-button:hover .circular-image-button__tooltip {
+    opacity: 1;
+}
+
+.circular-image-button__title {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.circular-image-button__sub {
+    display: block;
+    font-size: 12px;
+    color: #666;
+}

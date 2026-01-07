@@ -16,9 +16,9 @@ h-screen { height: 100vh !important; min-height: 100vh; }
 .text-white { color: white !important; }
 .bg-ocean-primary { background-color: var(--ocean-primary); }
 
-* {
-  color: var(--turquoise);
-}
+
+body { color: var(--sand-beige); }
+
 
 .hero { background: url('https://images.unsplash.com/photo-1580713127239-6954a0a33279?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover fixed; }
 .btn-primary { background: var(--sand); color: var(--deep-blue); }
@@ -61,3 +61,83 @@ h-screen { height: 100vh !important; min-height: 100vh; }
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
 }
+
+@layer components {
+  body { color: var(--sand-beige); }
+
+  .plan-title {
+    color: var(--sand-beige);
+    text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  }
+
+  .plan-subtitle { color: rgba(252, 252, 252, 0.72); }
+
+  .plan-tile {
+    position: relative;
+    background-color: rgba(15, 23, 42, 0.88);
+    border: 1px solid rgba(255,255,255,0.10);
+    backdrop-filter: blur(18px) saturate(170%);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    min-height: 180px;
+  }
+
+  @media (min-width: 768px) {
+    .plan-tile { min-height: 230px; }
+  }
+
+  .plan-tile:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,255,255,0.16);
+    box-shadow: 0 26px 75px rgba(0,0,0,0.60);
+  }
+
+  .plan-tile__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.9;
+    background:
+      radial-gradient(900px 420px at 0% 0%, rgba(20,184,166,0.20), transparent 55%),
+      radial-gradient(700px 380px at 100% 0%, rgba(14,165,233,0.16), transparent 55%),
+      radial-gradient(800px 420px at 50% 120%, rgba(11,163,127,0.16), transparent 55%);
+    transition: opacity .25s ease;
+  }
+
+  .plan-tile:hover .plan-tile__bg { opacity: 1; }
+
+  .plan-tile__kicker { color: rgba(254, 252, 191, 0.92) !important; }
+  .plan-tile__subtitle { color: rgba(252, 252, 252, 0.86) !important; }
+  .plan-tile__route { color: rgba(252, 252, 252, 0.55) !important; }
+  .plan-tile__cta { color: var(--sand-beige) !important; }
+
+  .plan-tile__arrow {
+    display: inline-flex;
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.10);
+    color: var(--sand-beige) !important;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease;
+  }
+
+  .plan-tile:hover .plan-tile__arrow {
+    transform: translateX(2px);
+    background: rgba(255,255,255,0.14);
+  }
+
+  .plan-tile--teal:hover { border-color: rgba(20,184,166,0.28); }
+  .plan-tile--sky:hover { border-color: rgba(14,165,233,0.28); }
+  .plan-tile--indigo:hover { border-color: rgba(99,102,241,0.28); }
+  .plan-tile--amber:hover { border-color: rgba(245,158,11,0.28); }
+  .plan-tile--rose:hover { border-color: rgba(244,63,94,0.28); }
+  .plan-tile--slate:hover { border-color: rgba(148,163,184,0.28); }
+}
+
+
+
+

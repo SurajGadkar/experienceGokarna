@@ -1,4 +1,5 @@
 import ActivitiesBanner from "./ActivitiesBanner";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -17,14 +18,15 @@ function Home() {
             {" "}
             Discover pristine beaches and untouched natural beauty{" "}
           </p>
-          <button className="text-hero bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300">
-            {" "}
-            Explore Paradise{" "}
-          </button>
+          <Link
+            to="/plan-trip"
+            className="text-hero bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300"
+          >
+            Plan Your Trip!
+          </Link>
         </div>
       </section>
 
-        
       <ActivitiesBanner />
     </div>
   );

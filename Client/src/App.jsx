@@ -8,6 +8,8 @@ import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 import Activities from "./components/Activities.jsx";
 import "./App.css";
+import FloatingMapButton from "./components/FloatingButton.jsx";
+import PlanTrip from "./components/PlanTrip.jsx";
 
 function App() {
   return (
@@ -21,11 +23,12 @@ function App() {
           <Route path="/about-us" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/activities" element={<Activities />} />
+          <Route path="/plan-trip" element={<PlanTrip />} />
         </Routes>
       </main>
       <a
         href="https://wa.me/9742781642"
-        class="whatsapp-float"
+        className="whatsapp-float"
         target="_blank"
         rel="noopener noreferrer"
       >
