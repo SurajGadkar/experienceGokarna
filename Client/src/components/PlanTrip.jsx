@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/PlanTrip.css"; // ✅ component-scoped stylesheet
+import "../styles/PlanTrip.css"
 
 const PLAN_TILES = [
   { id: "mini", label: "1N 2D" },

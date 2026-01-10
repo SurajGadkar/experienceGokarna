@@ -1,12 +1,15 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from "react";
+import { useParams } from "react-router-dom";
+import TripPlanner from "./TripPackage";
 
 function Trip() {
-  const {planId} = useParams();
+  const { planId } = useParams();
 
   return (
-    <div className="mt-10 text-black">Trip {planId}</div>
-  )
+    <>
+      <TripPlanner />
+    </>
+  );
 }
 
-export default Trip
+export default Trip;
