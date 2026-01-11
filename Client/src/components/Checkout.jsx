@@ -27,18 +27,22 @@ const TripDetailsForm = () => {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-    
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
     doc.setTextColor(33, 37, 41); // Dark charcoal
     doc.text("Gokarna Trip Itinerary", 14, 22);
-    
+
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(120);
-    doc.text(`Booking Ref: GOK-${Math.floor(1000 + Math.random() * 9000)}`, 14, 28);
+    doc.text(
+      `Booking Ref: GOK-${Math.floor(1000 + Math.random() * 9000)}`,
+      14,
+      28
+    );
     doc.text(`Date: ${new Date().toLocaleDateString()}`, 160, 28);
-    
+
     doc.setDrawColor(220);
     doc.line(14, 32, 196, 32);
 
@@ -46,14 +50,14 @@ const TripDetailsForm = () => {
     doc.setFont("helvetica", "bold");
     doc.setTextColor(41, 128, 185);
     doc.text("Traveler Details", 14, 45);
-    
+
     const personalData = [
       ["Lead Traveler", form.name],
       ["WhatsApp/Phone", form.phone],
       ["Email Address", form.email],
       ["Home City", form.city || "N/A"],
       ["Group Size", `${form.travellers} Person(s)`],
-      ["Budget Range", form.budget ? `INR ${form.budget}` : "TBD"]
+      ["Budget Range", form.budget ? `INR ${form.budget}` : "TBD"],
     ];
 
     autoTable(doc, {
@@ -63,7 +67,7 @@ const TripDetailsForm = () => {
       theme: "striped",
       headStyles: { fillColor: [41, 128, 185], fontSize: 11 },
       styles: { cellPadding: 3, fontSize: 10 },
-      margin: { left: 14, right: 14 }
+      margin: { left: 14, right: 14 },
     });
 
     const selectionsY = doc.lastAutoTable.finalY + 15;
@@ -71,11 +75,22 @@ const TripDetailsForm = () => {
     doc.text("Trip Customizations", 14, selectionsY);
 
     const selectionData = [
-      ["Stay", selections.stay ? `${selections.stay.name} (${selections.stay.price})` : "Not selected"],
-      ["Transport", selections.transport ? selections.transport.name : "Not selected"],
-      ["Activities", selections.activities.length > 0 
-        ? selections.activities.map(a => a.name).join(", ") 
-        : "No specific activities selected"]
+      [
+        "Stay",
+        selections.stay
+          ? `${selections.stay.name} (${selections.stay.price})`
+          : "Not selected",
+      ],
+      [
+        "Transport",
+        selections.transport ? selections.transport.name : "Not selected",
+      ],
+      [
+        "Activities",
+        selections.activities.length > 0
+          ? selections.activities.map((a) => a.name).join(", ")
+          : "No specific activities selected",
+      ],
     ];
 
     autoTable(doc, {
@@ -85,18 +100,18 @@ const TripDetailsForm = () => {
       theme: "grid",
       headStyles: { fillColor: [46, 204, 113], fontSize: 11 },
       styles: { cellPadding: 3, fontSize: 10 },
-      columnStyles: { 0: { fontStyle: 'bold', width: 40 } }
+      columnStyles: { 0: { fontStyle: "bold", width: 40 } },
     });
 
     if (form.notes) {
       const notesY = doc.lastAutoTable.finalY + 15;
       doc.setFontSize(14);
       doc.text("Special Requirements", 14, notesY);
-      
+
       doc.setFontSize(10);
       doc.setFont("helvetica", "italic");
       doc.setTextColor(80);
-      
+
       const splitNotes = doc.splitTextToSize(form.notes, 180);
       doc.text(splitNotes, 14, notesY + 8);
     }
@@ -123,42 +138,45 @@ const TripDetailsForm = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    generatePDF();
+    try {
+      generatePDF();
 
-    setTimeout(() => {
-      const message = `*New Gokarna Lead*\n\n` +
-        `* Name:* ${form.name}\n` +
-        `* WhatsApp:* ${form.phone}\n` +
-        `* Stay:* ${selections.stay?.name || 'N/A'}\n` +
-        `* Transport:* ${selections.transport?.name || 'N/A'}\n` +
-        `* Activities:* ${selections.activities.map(a => a.name).join(', ') || 'None'}\n` +
-        `* Budget:* ₹${form.budget || 'TBD'}\n` +
-        `* Travelers:* ${form.travellers}\n\n`;
+      setTimeout(() => {
+        const message =
+          `*New Gokarna Lead*\n\n` +
+          `* Name:* ${form.name}\n` +
+          `* WhatsApp:* ${form.phone}\n` +
+          `* Stay:* ${selections.stay?.name || "N/A"}\n` +
+          `* Transport:* ${selections.transport?.name || "N/A"}\n` +
+          `* Activities:* ${
+            selections.activities.map((a) => a.name).join(", ") || "None"
+          }\n` +
+          `* Budget:* ₹${form.budget || "TBD"}\n` +
+          `* Travelers:* ${form.travellers}\n\n`;
 
-      const whatsappUrl = `https://wa.me/9742781642?text=${encodeURIComponent(message)}`;
-      
-      window.location.href = whatsappUrl;
-    }, 4000); 
+        const whatsappUrl = `https://wa.me/9742781642?text=${encodeURIComponent(
+          message
+        )}`;
 
-  } catch (error) {
-    console.error("Submission failed", error);
-    alert("Something went wrong. Please try again.");
-  }
-};
+        window.location.href = whatsappUrl;
+      }, 4000);
+    } catch (error) {
+      console.error("Submission failed", error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <main className="trip-details">
       <div className="trip-details__shell">
         <header className="trip-details__header">
-          <h1 className="trip-details__title">
-            Tell us a bit about you
-          </h1>
+          <h1 className="trip-details__title">Tell us a bit about you</h1>
           <p className="trip-details__subtitle">
-            We’ll use this along with your selections to shape your Gokarna plan.
+            We’ll use this along with your selections to shape your Gokarna
+            plan.
           </p>
         </header>
 
@@ -278,15 +296,15 @@ const handleSubmit = async (e) => {
             </div>
 
             <div className="trip-form__actions">
+              <button type="submit" className="trip-form__submit">
+                Submit details
+              </button>
               <button
                 type="button"
                 className="trip-form__back"
                 onClick={() => navigate(-1)}
               >
                 ← Back
-              </button>
-              <button type="submit" className="trip-form__submit">
-                Submit details
               </button>
             </div>
           </form>

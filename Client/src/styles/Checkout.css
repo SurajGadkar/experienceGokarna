@@ -294,11 +294,11 @@
     }
 
     .trip-form__submit {
-      order: 2;
+      order: 1;
     }
 
     .trip-form__back {
-      order: 1;
+      order: 2;
     }
   }
 
