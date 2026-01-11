@@ -1,6 +1,8 @@
 // src/pages/TripDetailsForm.jsx
 import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable"; // Import the function directly
 import "../styles/Checkout.css";
 
 const TripDetailsForm = () => {
@@ -23,6 +25,99 @@ const TripDetailsForm = () => {
     notes: "",
   });
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(22);
+    doc.setTextColor(33, 37, 41); // Dark charcoal
+    doc.text("Gokarna Trip Itinerary", 14, 22);
+    
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(120);
+    doc.text(`Booking Ref: GOK-${Math.floor(1000 + Math.random() * 9000)}`, 14, 28);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 160, 28);
+    
+    doc.setDrawColor(220);
+    doc.line(14, 32, 196, 32);
+
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(41, 128, 185);
+    doc.text("Traveler Details", 14, 45);
+    
+    const personalData = [
+      ["Lead Traveler", form.name],
+      ["WhatsApp/Phone", form.phone],
+      ["Email Address", form.email],
+      ["Home City", form.city || "N/A"],
+      ["Group Size", `${form.travellers} Person(s)`],
+      ["Budget Range", form.budget ? `INR ${form.budget}` : "TBD"]
+    ];
+
+    autoTable(doc, {
+      startY: 50,
+      head: [["Field", "Information"]],
+      body: personalData,
+      theme: "striped",
+      headStyles: { fillColor: [41, 128, 185], fontSize: 11 },
+      styles: { cellPadding: 3, fontSize: 10 },
+      margin: { left: 14, right: 14 }
+    });
+
+    const selectionsY = doc.lastAutoTable.finalY + 15;
+    doc.setFontSize(14);
+    doc.text("Trip Customizations", 14, selectionsY);
+
+    const selectionData = [
+      ["Stay", selections.stay ? `${selections.stay.name} (${selections.stay.price})` : "Not selected"],
+      ["Transport", selections.transport ? selections.transport.name : "Not selected"],
+      ["Activities", selections.activities.length > 0 
+        ? selections.activities.map(a => a.name).join(", ") 
+        : "No specific activities selected"]
+    ];
+
+    autoTable(doc, {
+      startY: selectionsY + 5,
+      head: [["Category", "Preference"]],
+      body: selectionData,
+      theme: "grid",
+      headStyles: { fillColor: [46, 204, 113], fontSize: 11 },
+      styles: { cellPadding: 3, fontSize: 10 },
+      columnStyles: { 0: { fontStyle: 'bold', width: 40 } }
+    });
+
+    if (form.notes) {
+      const notesY = doc.lastAutoTable.finalY + 15;
+      doc.setFontSize(14);
+      doc.text("Special Requirements", 14, notesY);
+      
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "italic");
+      doc.setTextColor(80);
+      
+      const splitNotes = doc.splitTextToSize(form.notes, 180);
+      doc.text(splitNotes, 14, notesY + 8);
+    }
+
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(9);
+      doc.setTextColor(150);
+      doc.text(
+        "Thank you for choosing us to plan your Gokarna getaway!",
+        105,
+        285,
+        { align: "center" }
+      );
+    }
+
+    const fileName = `Gokarna_Trip_${form.name.replace(/\s+/g, "_")}.pdf`;
+    doc.save(fileName);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -30,6 +125,8 @@ const TripDetailsForm = () => {
 
  const handleSubmit = async (e) => {
   e.preventDefault();
+
+  generatePDF();
   
   const message = `*New Gokarna Lead*\n\n` +
     `* Name:* ${form.name}\n` +
@@ -43,7 +140,7 @@ const TripDetailsForm = () => {
 
   const whatsappUrl = `https://wa.me/9742781642?text=${encodeURIComponent(message)}`;
   
-  // Opens WhatsApp chat instantly
+ 
   window.open(whatsappUrl, '_blank');
   
   alert("✅ Message sent to WhatsApp! Check your WhatsApp now.");
