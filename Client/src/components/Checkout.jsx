@@ -123,27 +123,32 @@ const TripDetailsForm = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
 
-  generatePDF();
-  
-  const message = `*New Gokarna Lead*\n\n` +
-    `* Name:* ${form.name}\n` +
-    `* WhatsApp:* ${form.phone}\n` +
-    `* Stay:* ${selections.stay?.name || 'N/A'} (${selections.stay?.price || ''})\n` +
-    `* Transport:* ${selections.transport?.name || 'N/A'}\n` +
-    `* Activities:* ${selections.activities.map(a => a.name).join(', ') || 'None'}\n` +
-    `* Budget:* ₹${form.budget || 'TBD'}\n` +
-    `* Travelers:* ${form.travellers}\n\n` +
-    `* Ready to customize their Gokarna trip!* 📞`;
+  try {
+    generatePDF();
 
-  const whatsappUrl = `https://wa.me/9742781642?text=${encodeURIComponent(message)}`;
-  
- 
-  window.open(whatsappUrl, '_blank');
-  
-  alert("✅ Message sent to WhatsApp! Check your WhatsApp now.");
+    setTimeout(() => {
+      const message = `*New Gokarna Lead*\n\n` +
+        `* Name:* ${form.name}\n` +
+        `* WhatsApp:* ${form.phone}\n` +
+        `* Stay:* ${selections.stay?.name || 'N/A'}\n` +
+        `* Transport:* ${selections.transport?.name || 'N/A'}\n` +
+        `* Activities:* ${selections.activities.map(a => a.name).join(', ') || 'None'}\n` +
+        `* Budget:* ₹${form.budget || 'TBD'}\n` +
+        `* Travelers:* ${form.travellers}\n\n` +
+        `*PDF Summary Downloaded!* 📜`;
+
+      const whatsappUrl = `https://wa.me/9742781642?text=${encodeURIComponent(message)}`;
+      
+      window.location.href = whatsappUrl;
+    }, 800); 
+
+  } catch (error) {
+    console.error("Submission failed", error);
+    alert("Something went wrong. Please try again.");
+  }
 };
 
   return (
