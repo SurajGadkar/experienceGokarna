@@ -7,7 +7,7 @@ function Trip() {
 
   return (
     <>
-      <TripPlanner />
+      <TripPlanner planId={planId}/>
     </>
   );
 }
