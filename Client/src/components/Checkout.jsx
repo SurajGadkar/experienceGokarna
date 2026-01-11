@@ -142,7 +142,7 @@ const handleSubmit = async (e) => {
       const whatsappUrl = `https://wa.me/9742781642?text=${encodeURIComponent(message)}`;
       
       window.location.href = whatsappUrl;
-    }, 800); 
+    }, 4000); 
 
   } catch (error) {
     console.error("Submission failed", error);
