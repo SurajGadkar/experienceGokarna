@@ -137,8 +137,7 @@ const handleSubmit = async (e) => {
         `* Transport:* ${selections.transport?.name || 'N/A'}\n` +
         `* Activities:* ${selections.activities.map(a => a.name).join(', ') || 'None'}\n` +
         `* Budget:* ₹${form.budget || 'TBD'}\n` +
-        `* Travelers:* ${form.travellers}\n\n` +
-        `*PDF Summary Downloaded!* 📜`;
+        `* Travelers:* ${form.travellers}\n\n`;
 
       const whatsappUrl = `https://wa.me/9742781642?text=${encodeURIComponent(message)}`;
       
