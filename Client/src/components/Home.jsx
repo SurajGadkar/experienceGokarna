@@ -1,5 +1,6 @@
 import ActivitiesBanner from "./ActivitiesBanner";
 import { Link } from "react-router-dom";
+import homeBanner from "../assets/homeBanner.png";
 
 function Home() {
   return (
@@ -8,7 +9,7 @@ function Home() {
         className="bg-no-repeat bg-center h-screen flex items-center justify-center text-white text-center p-4 pt-20"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1580713127239-6954a0a33279?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            `url(${homeBanner})`,
           backgroundSize: "cover",
         }}
       >
