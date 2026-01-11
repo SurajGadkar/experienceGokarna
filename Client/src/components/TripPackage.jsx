@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/TripPlanner.css";
 
 const ACTIVITY_CONFIG = {
@@ -41,6 +42,8 @@ const TripPlanner = ({ planId }) => {
     activities: [],
   });
 
+  const navigate = useNavigate();
+
   const updateSelection = (category, option) => {
     // console.log("Selecting:", category, option);
     
@@ -72,7 +75,9 @@ const TripPlanner = ({ planId }) => {
   };
 
   const nextStep = () => {
-    console.log("Final plan:", selections);
+    navigate(`/plan-trip/${planId}/details`, {
+      state: { selections },
+    });
   };
 
   const config = ACTIVITY_CONFIG;
@@ -137,7 +142,7 @@ const TripPlanner = ({ planId }) => {
             style={{
               width: `${
                 (Object.values(selections).filter(Boolean).length /
-                  Object.keys(config).length) *
+                  (Object.keys(config).length +1)) *
                 100
               }%`,
             }}
@@ -146,13 +151,9 @@ const TripPlanner = ({ planId }) => {
         <button
           className="next-btn"
           onClick={nextStep}
-          disabled={
-            !selections.stay ||
-            !selections.transport ||
-            selections.activities.length === 0
-          }
+          disabled={!selections.stay && !selections.transport && selections.activities.length === 0}
         >
-          Next: Review Plan ({selections.activities?.length || 0}/4 activities)
+          Next: Review Plan
         </button>
       </div>
     </div>

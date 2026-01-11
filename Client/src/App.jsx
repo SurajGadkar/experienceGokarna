@@ -11,6 +11,7 @@ import "./App.css";
 import FloatingMapButton from "./components/FloatingButton.jsx";
 import PlanTrip from "./components/PlanTrip.jsx";
 import Trip from "./components/Trip.jsx";
+import TripDetailsForm from "./components/Checkout.jsx";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/activities" element={<Activities />} />
           <Route path="/plan-trip" element={<PlanTrip />} />
           <Route path="/plan-trip/:planId" element={<Trip />} />
+          <Route path="/plan-trip/:planId/details" element={<TripDetailsForm />} />
         </Routes>
       </main>
       <a

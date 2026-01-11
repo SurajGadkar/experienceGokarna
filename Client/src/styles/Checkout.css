@@ -1,0 +1,239 @@
+.trip-details {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.trip-details__shell {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.trip-details__header {
+  text-align: center;
+  color: white;
+  margin-bottom: 3rem;
+}
+
+.trip-details__title {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 900;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, white 0%, rgba(255,255,255,0.8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.trip-details__subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Summary section */
+.trip-summary {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.trip-summary__title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.trip-summary__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.trip-summary__card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.trip-summary__card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #64748b;
+  margin: 0 0 0.75rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trip-summary__card p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.4;
+}
+
+/* Form section */
+.trip-form {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.trip-form__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.trip-form__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.trip-form__field label {
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.trip-form__field input,
+.trip-form__field textarea {
+  padding: 1rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.trip-form__field input:focus,
+.trip-form__field textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.trip-form__field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.trip-form__field input::placeholder {
+  color: #94a3b8;
+}
+
+.trip-form__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 2px solid #f1f5f9;
+}
+
+.trip-form__back {
+  padding: 1rem 2rem;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.trip-form__back:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.trip-form__submit {
+  flex: 1;
+  padding: 1.25rem 2rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.trip-form__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+}
+
+.trip-form__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .trip-details {
+    padding: 1rem 0.5rem;
+  }
+  
+  .trip-details__shell {
+    padding: 0 1rem;
+  }
+  
+  .trip-summary__grid,
+  .trip-form__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .trip-form__actions {
+    flex-direction: column;
+  }
+  
+  .trip-form__submit {
+    order: 2;
+  }
+  
+  .trip-form__back {
+    order: 1;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.trip-summary,
+.trip-form {
+  animation: fadeInUp 0.5s ease-out;
+}
