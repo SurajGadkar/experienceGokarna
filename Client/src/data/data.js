@@ -170,38 +170,37 @@ export const activities = {
 
 
 export const contactInfo = [
-    {
-      icon: '📧',
-      title: 'Email',
-      detail: 'gokarnaadventures@gmail.com',
-      link: 'mailto:gokarnaadventures@gmail.com'
-    },
-    {
-      icon: '📞',
-      title: 'Phone',
-      detail: '+91 98765 43210',
-      link: 'tel:+919876543210'
-    },
-    {
-      icon: '📍',
-      title: 'Address',
-      detail: 'Om Beach Road, Gokarna, Karnataka 581326',
-      link: 'https://maps.google.com/?q=Om+Beach+Road,+Gokarna'
-    },
-    {
-      icon: '🕒',
-      title: 'Hours',
-      detail: 'Mon-Sun: 8AM - 8PM',
-      link: ''
-    }
-  ];
+  {
+    icon: '📧',
+    title: 'Email',
+    detail: 'experiencegokarna@gmail.com',
+    link: 'mailto:experiencegokarna@gmail.com'
+  },
+  {
+    icon: '📞',
+    title: 'Phone',
+    detail: '+91 98765 43210',
+    link: 'tel:+919876543210'
+  },
+  {
+    icon: '📍',
+    title: 'Address',
+    detail: 'Om Beach Road, Gokarna, Karnataka 581326',
+    link: 'https://maps.google.com/?q=Om+Beach+Road,+Gokarna'
+  },
+  {
+    icon: '🕒',
+    title: 'Hours',
+    detail: 'Mon-Sun: 8AM - 8PM',
+    link: ''
+  }
+];
 
 export const socialLinks = [
-    { icon: '📘', label: 'Facebook', href: 'https://facebook.com/gokarnaadventures', color: 'from-blue-600 to-blue-800' },
-    { icon: '📷', label: 'Instagram', href: 'https://instagram.com/gokarnaadventures', color: 'from-pink-500 to-purple-600' },
-    { icon: '🐦', label: 'X', href: 'https://twitter.com/gokarnaadventures', color: 'from-sky-400 to-blue-500' },
-    { icon: '📱', label: 'WhatsApp', href: 'https://wa.me/919876543210', color: 'from-green-500 to-emerald-600' },
-    { icon: '📍', label: 'Maps', href: 'https://maps.google.com/?q=Gokarna', color: 'from-red-500 to-orange-500' },
-    { icon: '🎥', label: 'YouTube', href: 'https://youtube.com/@gokarnaadventures', color: 'from-red-600 to-red-800' }
-  ];
-
+  { icon: '📘', label: 'Facebook', href: 'mailto:experiencegokarna@gmail.com', color: 'from-blue-600 to-blue-800' },
+  { icon: '📷', label: 'Instagram', href: 'mailto:experiencegokarna@gmail.com', color: 'from-pink-500 to-purple-600' },
+  { icon: '🐦', label: 'X', href: 'mailto:experiencegokarna@gmail.com', color: 'from-sky-400 to-blue-500' },
+  { icon: '📱', label: 'WhatsApp', href: 'https://wa.me/919876543210', color: 'from-green-500 to-emerald-600' },
+  { icon: '📍', label: 'Maps', href: 'https://maps.google.com/?q=Gokarna', color: 'from-red-500 to-orange-500' },
+  { icon: '🎥', label: 'YouTube', href: 'mailto:experiencegokarna@gmail.com', color: 'from-red-600 to-red-800' }
+];
