@@ -179,8 +179,8 @@ export const contactInfo = [
   {
     icon: '📞',
     title: 'Phone',
-    detail: '+91 98765 43210',
-    link: 'tel:+919876543210'
+    detail: '+91 9742781642',
+    link: 'tel:+919742781642'
   },
   {
     icon: '📍',
