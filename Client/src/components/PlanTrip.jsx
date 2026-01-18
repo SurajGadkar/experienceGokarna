@@ -14,7 +14,7 @@ const PLAN_TILES = [
 export default function PlanTrip() {
   return (
     <main className="main-content px-4 py-8 sm:px-6">
-      <div className="mx-auto w-full max-w-4xl">
+      <div className="mx-auto w-full max-w-4xl ">
         <header className="mb-8 text-center">
           <h1 className="text-3xl sm:text-4xl font-serif font-black plan-title">
             Choose your duration
