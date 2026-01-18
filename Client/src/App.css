@@ -1,4 +1,4 @@
-/* Floating WhatsApp Button */
+/* Floating WhatsApp Button - LEFT BOTTOM */
 .whatsapp-float {
   position: fixed;
   left: 20px;
@@ -13,7 +13,7 @@
   justify-content: center;
   font-size: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
+  z-index: 999;
   transition: all 0.3s ease;
   text-decoration: none;
 }
@@ -27,3 +27,69 @@
   margin-top: 2px;
 }
 
+/* PlanTrip Rectangular Button - LEFT (above WhatsApp) */
+.plantrip-float {
+  position: fixed;
+  left: 20px;           /* Same left as WhatsApp */
+  bottom: 95px;         /* Above WhatsApp (20px + 60px height + 15px gap) */
+  width: 120px;         /* Rectangular width */
+  height: 48px;         /* Rectangular height */
+  background: linear-gradient(135deg, var(--turquoise-sea, #0f766e), #115e59);
+  border: none;
+  border-radius: 24px;  /* Rounded rectangle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 
+    0 8px 25px rgba(15, 118, 110, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  animation: floatPulse 2s ease-in-out infinite;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.plantrip-float:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 15px 35px rgba(15, 118, 110, 0.5),
+    0 0 0 1px rgba(255,255,255,0.3);
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+}
+
+.plantrip-float:active {
+  transform: scale(0.98);
+}
+
+/* Floating pulse animation */
+@keyframes floatPulse {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Responsive - Adjust on mobile */
+@media (max-width: 640px) {
+  .plantrip-float {
+    left: 16px;
+    bottom: 90px;
+    width: 100px;
+    height: 42px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+  }
+  
+  .whatsapp-float {
+    left: 16px;
+    bottom: 16px;
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+  }
+}
