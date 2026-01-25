@@ -1,65 +1,87 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import dayjs from "dayjs";
 import "../styles/TripPlanner.css";
 
 const ACTIVITY_CONFIG = {
   stay: {
     name: "Stay",
+    icon: "🏠",
     options: [
-      { id: "hostel", name: "Hostel", price: "₹800/night", icon: "🏠" },
-      { id: "beach-hut", name: "Beach Hut", price: "₹1500/night", icon: "🌴" },
-      { id: "resort", name: "Resort", price: "₹3500/night", icon: "🏖️" },
-      { id: "homestay", name: "Homestay", price: "₹1200/night", icon: "🏡" },
+      { id: "hostel", name: "Hostel", price: "800", icon: "🏠" },
+      { id: "beach-hut", name: "Beach Hut", price: "1500", icon: "🌴" },
+      { id: "resort", name: "Resort", price: "3500", icon: "🏖️" },
+      { id: "homestay", name: "Homestay", price: "1200", icon: "🏡" },
     ],
   },
   transport: {
     name: "Transport",
+    icon: "🚌",
     options: [
-      { id: "bus", name: "Bus", price: "₹600", icon: "🚌" },
-      { id: "train", name: "Train", price: "₹400", icon: "🚂" },
-      { id: "bike-rental", name: "Bike Rental", price: "₹800/day", icon: "🏍️" },
-      { id: "self-drive", name: "Self Drive", price: "₹2500", icon: "🚗" },
+      { id: "bus", name: "Bus", price: "600", icon: "🚌" },
+      { id: "train", name: "Train", price: "400", icon: "🚂" },
+      { id: "bike-rental", name: "Bike Rental", price: "800", icon: "🏍️" },
+      { id: "self-drive", name: "Self Drive", price: "2500", icon: "🚗" },
     ],
   },
   activities: {
     name: "Activities",
+    icon: "🥾",
     options: [
-      { id: "beach-trek", name: "Beach Trek", price: "Free", icon: "🥾" },
-      { id: "temple-tour", name: "Temple Tour", price: "₹200", icon: "🛕" },
-      { id: "yoga", name: "Yoga Session", price: "₹500", icon: "🧘" },
-      { id: "kayaking", name: "Kayaking", price: "₹800", icon: "🛶" },
+      { id: "beach-trek", name: "Beach Trek", price: "0", icon: "🥾" },
+      { id: "temple-tour", name: "Temple Tour", price: "200", icon: "🛕" },
+      { id: "yoga", name: "Yoga Session", price: "500", icon: "🧘" },
+      { id: "kayaking", name: "Kayaking", price: "800", icon: "🛶" },
     ],
   },
 };
 
-const TripPlanner = ({ planId }) => {
+// Custom MUI Theme to match your Teal/Crystal UI
+const theme = createTheme({
+  palette: {
+    primary: { main: "#0d9488" },
+  },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: "14px",
+          backgroundColor: "rgba(255, 255, 255, 0.6)",
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderWidth: "2px",
+          },
+        },
+      },
+    },
+  },
+});
+
+export default function TripPlanner() {
+  const { planId } = useParams();
+  const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState("stay");
+  const [travelDate, setTravelDate] = useState(null);
   const [selections, setSelections] = useState({
     stay: null,
     transport: null,
     activities: [],
   });
 
-  const navigate = useNavigate();
-
   const updateSelection = (category, option) => {
     if (category === "activities") {
       setSelections((prev) => {
-        const currentActivities = prev.activities || [];
-        const isSelected = currentActivities.some(
-          (sel) => sel.id === option.id,
-        );
-
-        let newActivities;
-        if (isSelected) {
-          newActivities = currentActivities.filter(
-            (sel) => sel.id !== option.id,
-          );
-        } else {
-          newActivities = [...currentActivities, option];
-        }
-
-        return { ...prev, activities: newActivities };
+        const isSelected = prev.activities.some((sel) => sel.id === option.id);
+        return {
+          ...prev,
+          activities: isSelected
+            ? prev.activities.filter((sel) => sel.id !== option.id)
+            : [...prev.activities, option],
+        };
       });
     } else {
       setSelections((prev) => ({
@@ -70,104 +92,123 @@ const TripPlanner = ({ planId }) => {
   };
 
   const nextStep = () => {
-    const tabs = Object.keys(config);
+    const tabs = Object.keys(ACTIVITY_CONFIG);
     const currentIndex = tabs.indexOf(activeTab);
 
-    // If we aren't on the last tab, just move to the next tab
     if (currentIndex < tabs.length - 1) {
       setActiveTab(tabs[currentIndex + 1]);
     } else {
-      // If we ARE on the last tab, navigate to the next page
       navigate(`/plan-trip/${planId}/details`, {
-        state: { selections },
+        state: { 
+          selections, 
+          travelDate: travelDate ? travelDate.format("YYYY-MM-DD") : null, 
+          planId 
+        },
       });
     }
   };
 
-  const config = ACTIVITY_CONFIG;
+  const currentCategory = ACTIVITY_CONFIG[activeTab];
 
   return (
-    <div className="trip-planner">
-      {/* ✅ STICKY TABS - Always visible */}
-      <div className="sticky-tabs">
-        <div className="activity-bar">
-          {Object.keys(config).map((key) => (
-            <button
-              key={key}
-              className={`activity-tab ${activeTab === key ? "active" : ""}`}
-              onClick={() => setActiveTab(key)}
-            >
-              {config[key].icon} {config[key].name}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* ✅ SCROLLABLE CONTENT */}
-      <div className="scrollable-content">
-        {/* Middle */}
-        <div className="selection-area">
-          <div className="selection-header">
-            <h2>{config[activeTab].name}</h2>
-            <span className="selection-count">
-              {activeTab === "activities"
-                ? `${selections.activities?.length || 0}/4 selected`
-                : selections[activeTab]
-                  ? "✓ Selected"
-                  : "Select one"}
-            </span>
-          </div>
-
-          <div className="options-grid">
-            {config[activeTab].options.map((option) => {
-              const isSelected =
-                activeTab === "activities"
-                  ? selections.activities?.some((sel) => sel.id === option.id)
-                  : selections[activeTab]?.id === option.id;
-
-              return (
-                <div
-                  key={option.id}
-                  className={`option-card ${isSelected ? "selected" : ""}`}
-                  onClick={() => updateSelection(activeTab, option)}
+    <ThemeProvider theme={theme}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div className="trip-planner">
+          {/* 1. Sticky Tabs Bar */}
+          <div className="sticky-tabs">
+            <div className="activity-bar">
+              {Object.entries(ACTIVITY_CONFIG).map(([key, config]) => (
+                <button
+                  key={key}
+                  className={`activity-tab ${activeTab === key ? "active" : ""}`}
+                  onClick={() => setActiveTab(key)}
                 >
-                  <div className="option-icon">{option.icon}</div>
-                  <div className="option-details">
-                    <h3>{option.name}</h3>
-                    <span className="option-price">{option.price}</span>
-                  </div>
-                  {isSelected && <div className="selected-checkmark">✓</div>}
+                  <span>{config.icon}</span>
+                  <span>{config.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ✅ MUI Date Picker Integrated between Header and Grid */}
+              <div className="date-picker-container-mui">
+                <div className="date-picker-label">
+                  <span className="calendar-emoji">📅</span>
+                  <label>Select Trip Date</label>
                 </div>
-              );
-            })}
-          </div>
-        </div>
+                <DatePicker
+                  value={travelDate}
+                  onChange={(newValue) => setTravelDate(newValue)}
+                  disablePast
+                  slotProps={{
+                    textField: {
+                      fullWidth: true,
+                      variant: "outlined",
+                      placeholder: "Pick a date",
+                    },
+                  }}
+                />
+              </div>
 
-        {/* Footer */}
-        <div className="planner-footer">
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{
-                width: `${
-                  (Object.values(selections).filter(Boolean).length /
-                    Object.keys(config).length) *
-                  100
-                }%`,
-              }}
-            />
+          {/* 2. Main Glass Content Area */}
+          <div className="scrollable-content">
+            <div className="selection-area">
+              <header className="selection-header">
+                <h2>{currentCategory.name}</h2>
+                <span className="selection-count">
+                  {activeTab === "activities" 
+                    ? `${selections.activities.length} selected` 
+                    : selections[activeTab] ? "Selected ✓" : "Required"}
+                </span>
+              </header>
+
+              
+
+              {/* 3. Options Grid */}
+              <div className="options-grid">
+                {currentCategory.options.map((option) => {
+                  const isSelected =
+                    activeTab === "activities"
+                      ? selections.activities.some((sel) => sel.id === option.id)
+                      : selections[activeTab]?.id === option.id;
+
+                  return (
+                    <div
+                      key={option.id}
+                      className={`option-card ${isSelected ? "selected" : ""}`}
+                      onClick={() => updateSelection(activeTab, option)}
+                    >
+                      <div className="option-icon">{option.icon}</div>
+                      <div className="option-info">
+                        <h3>{option.name}</h3>
+                        <span className="option-price">₹{option.price}</span>
+                      </div>
+                      {isSelected && <div className="selected-checkmark">✓</div>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 4. Footer with Progress and Next Button */}
+            <footer className="planner-footer">
+              <div className="progress-container">
+                <div 
+                  className="progress-fill" 
+                  style={{ width: `${((Object.keys(ACTIVITY_CONFIG).indexOf(activeTab) + 1) / 3) * 100}%` }}
+                />
+              </div>
+              <button
+                className="next-btn"
+                onClick={nextStep}
+                disabled={!travelDate || (activeTab !== "activities" && !selections[activeTab])}
+              >
+                {!travelDate ? "Pick a Travel Date" : activeTab === "activities" ? "Review Final Plan" : "Next Step"}
+              </button>
+            </footer>
           </div>
-          <button
-            className="next-btn"
-            onClick={nextStep}
-            disabled={activeTab !== "activities" && !selections[activeTab]} // Disable if current tab isn't filled
-          >
-            {activeTab === "activities" ? "Review Plan" : "Next Step"}
-          </button>
         </div>
-      </div>
-    </div>
+      </LocalizationProvider>
+    </ThemeProvider>
   );
-};
-
-export default TripPlanner;
+}
