@@ -43,30 +43,27 @@ const TripPlanner = ({ planId }) => {
   const navigate = useNavigate();
 
   const updateSelection = (category, option) => {
-    if (category === "activities") {
-      setSelections((prev) => {
-        const currentActivities = prev.activities || [];
-        const isSelected = currentActivities.some((sel) => sel.id === option.id);
-        
-        let newActivities;
-        if (isSelected) {
-          newActivities = currentActivities.filter((sel) => sel.id !== option.id);
-        } else {
-          newActivities = [...currentActivities, option];
-        }
-        
-        return {
-          ...prev,
-          activities: newActivities,
-        };
-      });
-    } else {
-      setSelections((prev) => ({
-        ...prev,
-        [category]: option,
-      }));
-    }
-  };
+  if (category === "activities") {
+    setSelections((prev) => {
+      const currentActivities = prev.activities || [];
+      const isSelected = currentActivities.some((sel) => sel.id === option.id);
+      
+      let newActivities;
+      if (isSelected) {
+        newActivities = currentActivities.filter((sel) => sel.id !== option.id);
+      } else {
+        newActivities = [...currentActivities, option];
+      }
+      
+      return { ...prev, activities: newActivities };
+    });
+  } else {
+    setSelections((prev) => ({
+      ...prev,
+      [category]: prev[category]?.id === option.id ? null : option,
+    }));
+  }
+};
 
   const nextStep = () => {
     navigate(`/plan-trip/${planId}/details`, {
