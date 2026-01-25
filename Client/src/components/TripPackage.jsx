@@ -36,22 +36,24 @@ const ACTIVITY_CONFIG = {
       { id: "temple-tour", name: "Temple Tour", price: "200", icon: "🛕" },
       { id: "yoga", name: "Yoga Session", price: "500", icon: "🧘" },
       { id: "kayaking", name: "Kayaking", price: "800", icon: "🛶" },
-      { id: "surfing", name: "Surfing", price: "1200", icon: "🏄" },
     ],
   },
 };
 
+// Custom MUI Theme to match your Teal/Crystal UI
 const theme = createTheme({
-  palette: { primary: { main: "#0d9488" } },
+  palette: {
+    primary: { main: "#0d9488" },
+  },
   components: {
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: "50px",
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
-          height: "42px",
-          fontSize: "0.85rem",
-          "& fieldset": { border: "none" },
+          borderRadius: "14px",
+          backgroundColor: "rgba(255, 255, 255, 0.6)",
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderWidth: "2px",
+          },
         },
       },
     },
@@ -92,11 +94,16 @@ export default function TripPlanner() {
   const nextStep = () => {
     const tabs = Object.keys(ACTIVITY_CONFIG);
     const currentIndex = tabs.indexOf(activeTab);
+
     if (currentIndex < tabs.length - 1) {
       setActiveTab(tabs[currentIndex + 1]);
     } else {
       navigate(`/plan-trip/${planId}/details`, {
-        state: { selections, travelDate: travelDate?.format("YYYY-MM-DD"), planId },
+        state: { 
+          selections, 
+          travelDate: travelDate ? travelDate.format("YYYY-MM-DD") : null, 
+          planId 
+        },
       });
     }
   };
@@ -107,56 +114,61 @@ export default function TripPlanner() {
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div className="trip-planner">
-          {/* ✅ Horizontally Scrollable Header Bar */}
-          <div className="tab-scroll-container">
-            <div className="activity-bar">
-              <button
-                className={`activity-tab ${activeTab === "stay" ? "active" : ""}`}
-                onClick={() => setActiveTab("stay")}
-              >
-                <span>🏠</span><span>Stay</span>
-              </button>
-
-              <div className="inline-date-picker">
-                <DatePicker
-                  value={travelDate}
-                  onChange={(val) => setTravelDate(val)}
-                  disablePast
-                  slotProps={{ textField: { size: "small", placeholder: "Date" } }}
-                />
-              </div>
-
-              <button
-                className={`activity-tab ${activeTab === "transport" ? "active" : ""}`}
-                onClick={() => setActiveTab("transport")}
-              >
-                <span>🚌</span><span>Transport</span>
-              </button>
-
-              <button
-                className={`activity-tab ${activeTab === "activities" ? "active" : ""}`}
-                onClick={() => setActiveTab("activities")}
-              >
-                <span>🥾</span><span>Activities</span>
-              </button>
+          {/* 1. Sticky Tabs Bar */}
+          <div className="sticky-tabs">
+            <div className="activity-bar ">
+              {Object.entries(ACTIVITY_CONFIG).map(([key, config]) => (
+                <button
+                  key={key}
+                  className={`activity-tab ${activeTab === key ? "active" : ""}`}
+                  onClick={() => setActiveTab(key)}
+                >
+                  <span>{config.icon}</span>
+                  <span>{config.name}</span>
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Main Selection Card */}
-          <div className="scrollable-content">
-            <header className="selection-header">
-              <h2>{currentCategory.name}</h2>
-              <span className="selection-count">
-                {activeTab === "activities" 
-                  ? `${selections.activities.length}` 
-                  : selections[activeTab] ? "✓" : "!"}
-              </span>
-            </header>
+          {/* ✅ MUI Date Picker Integrated between Header and Grid */}
+              <div className="date-picker-container-mui">
+                <div className="date-picker-label">
+                  <span className="calendar-emoji">📅</span>
+                  <label>Select Trip Date</label>
+                </div>
+                <DatePicker
+                  value={travelDate}
+                  onChange={(newValue) => setTravelDate(newValue)}
+                  disablePast
+                  slotProps={{
+                    textField: {
+                      fullWidth: true,
+                      variant: "outlined",
+                      placeholder: "Pick a date",
+                    },
+                  }}
+                />
+              </div>
 
-            <div className="options-scroll-box">
+          {/* 2. Main Glass Content Area */}
+          <div className="scrollable-content">
+            <div className="selection-area">
+              <header className="selection-header">
+                <h2>{currentCategory.name}</h2>
+                <span className="selection-count">
+                  {activeTab === "activities" 
+                    ? `${selections.activities.length} selected` 
+                    : selections[activeTab] ? "Selected ✓" : "Required"}
+                </span>
+              </header>
+
+              
+
+              {/* 3. Options Grid */}
               <div className="options-grid">
                 {currentCategory.options.map((option) => {
-                  const isSelected = activeTab === "activities"
+                  const isSelected =
+                    activeTab === "activities"
                       ? selections.activities.some((sel) => sel.id === option.id)
                       : selections[activeTab]?.id === option.id;
 
@@ -177,17 +189,24 @@ export default function TripPlanner() {
                 })}
               </div>
             </div>
-          </div>
 
-          <footer className="planner-footer">
-            <button
-              className="next-btn"
-              onClick={nextStep}
-              disabled={!travelDate || (activeTab !== "activities" && !selections[activeTab])}
-            >
-              {activeTab === "activities" ? "Review Plan" : "Next"}
-            </button>
-          </footer>
+            {/* 4. Footer with Progress and Next Button */}
+            <footer className="planner-footer">
+              <div className="progress-container">
+                <div 
+                  className="progress-fill" 
+                  style={{ width: `${((Object.keys(ACTIVITY_CONFIG).indexOf(activeTab) + 1) / 3) * 100}%` }}
+                />
+              </div>
+              <button
+                className="next-btn"
+                onClick={nextStep}
+                disabled={!travelDate || (activeTab !== "activities" && !selections[activeTab])}
+              >
+                {!travelDate ? "Pick a Travel Date" : activeTab === "activities" ? "Review Final Plan" : "Next Step"}
+              </button>
+            </footer>
+          </div>
         </div>
       </LocalizationProvider>
     </ThemeProvider>

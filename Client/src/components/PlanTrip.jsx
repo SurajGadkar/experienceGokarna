@@ -5,7 +5,7 @@ import "../styles/PlanTrip.css";
 const PLAN_TILES = [
   { id: "mini", label: "1N 2D", accent: "amber" },
   { id: "short", label: "2N 3D", accent: "sky" },
-  { id: "classic", label: "3N 4D",accent: "teal" },
+  { id: "classic", label: "3N 4D", accent: "teal" },
   { id: "long", label: "4N 5D", accent: "indigo" },
   { id: "weekend", label: "Weekend", accent: "rose" },
   { id: "relaxed", label: "Relaxed", accent: "emerald" },
@@ -28,28 +28,24 @@ export default function PlanTrip() {
         <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 auto-rows-fr">
           {PLAN_TILES.map((tile) => (
             <li key={tile.id} className="list-none">
+              {/* ✅ FIXED: Only one Link component here */}
               <Link
                 to={`/plan-trip/${tile.id}`}
                 data-id={tile.id}
                 aria-label={`Select ${tile.label}`}
                 className={[
                   "plan-tile",
-                  tile.accent,
-                  "h-full",
-                  "block rounded-3xl overflow-hidden",
+                  "group",
+                  `plan-tile--${tile.accent}`,
+                  "h-full block rounded-3xl overflow-hidden",
                   "focus:outline-none focus:ring-2 focus:ring-[rgba(11,163,127,0.35)]",
                 ].join(" ")}
               >
-                <Link
-                  to={`/plan-trip/${tile.id}`}
-                  className={`plan-tile group plan-tile--${tile.accent}`}
-                >
-                  <div className="plan-tile__glare" />
-                  <div className="relative z-10 h-full flex flex-col items-center justify-center p-6">
-                    <span className="plan-tile__label">{tile.label}</span>
-                    <div className="plan-tile__status">View Package</div>
-                  </div>
-                </Link>
+                <div className="plan-tile__glare" />
+                <div className="relative z-10 h-full flex flex-col items-center justify-center p-6">
+                  <span className="plan-tile__label">{tile.label}</span>
+                  <div className="plan-tile__status">View Package</div>
+                </div>
               </Link>
             </li>
           ))}
