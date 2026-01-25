@@ -38,6 +38,11 @@
     border-radius: 100px;
     border: 1.5px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow-x: scroll;
+  }
+
+  .activity-bar::-webkit-scrollbar {
+    display: none;
   }
 
   .activity-tab {
@@ -65,8 +70,8 @@
 
   /* Main Glassmorph Selection Area */
   .scrollable-content {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(30px) saturate(220%);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(5px) saturate(120%);
     border-radius: 40px;
     padding: 2.5rem;
     border: 1.5px solid rgba(255, 255, 255, 0.8);
