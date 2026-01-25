@@ -4,8 +4,7 @@
   .checkout-page {
     min-height: 100vh;
     padding: 2rem 1rem;
-    /* Using the same background strategy as your Planner page */
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), 
+    background: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.5)), 
                 url('../assets/2ndBanner.jpg') center/cover no-repeat fixed;
     display: flex;
     justify-content: center;
@@ -14,64 +13,45 @@
 
   .checkout-container {
     width: 100%;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    max-width: 480px;
+    animation: slideUp 0.6s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .checkout-header {
     text-align: center;
     color: white;
+    margin-bottom: 2rem;
   }
 
   .checkout-header h1 {
-    font-size: 2.2rem;
+    font-size: 2.8rem;
     font-weight: 900;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-
-  .checkout-header p {
-    font-weight: 500;
-    opacity: 0.9;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  }
-
-  /* Summary Chips */
-  .selection-summary-glass {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
+    letter-spacing: -1.5px;
+    background: linear-gradient(to bottom right, #fff, #2dd4bf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
   }
 
-  .summary-chip {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    padding: 8px 16px;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  /* Main Form Glass Card */
   .form-card-glass {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(25px) saturate(160%);
-    border-radius: 35px;
-    padding: 2.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    border-radius: 40px;
+    padding: 3rem 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
   }
 
   .details-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.8rem;
   }
 
   .input-group {
@@ -81,77 +61,83 @@
   }
 
   .input-group label {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     font-weight: 800;
-    color: #0f172a;
-    margin-left: 4px;
+    color: #5eead4;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-left: 5px;
   }
 
   .input-group input {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    padding: 14px 20px;
-    border-radius: 18px;
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 22px;
+    border-radius: 20px;
     font-size: 1rem;
-    transition: all 0.3s ease;
-    color: #1e293b;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: white;
   }
 
   .input-group input:focus {
     outline: none;
-    background: white;
-    border-color: #0d9488;
-    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+    border-color: #2dd4bf;
+    background: rgba(15, 23, 42, 0.7);
+    box-shadow: 0 0 0 5px rgba(45, 212, 191, 0.2);
+    transform: translateY(-2px);
   }
 
   .form-footer {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 1rem;
+    gap: 1.2rem;
     margin-top: 1rem;
   }
 
   .btn-back {
-    padding: 14px;
-    border-radius: 18px;
+    padding: 16px;
+    border-radius: 20px;
     font-weight: 700;
-    background: rgba(255, 255, 255, 0.3);
-    color: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
     transition: 0.3s;
   }
 
   .btn-back:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
   }
 
   .btn-submit {
-    padding: 14px;
-    border-radius: 18px;
+    padding: 16px;
+    border-radius: 20px;
     font-weight: 900;
     background: #0d9488;
     color: white;
+    cursor: pointer;
+    transition: all 0.4s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 10px 20px rgba(13, 148, 136, 0.3);
-    transition: 0.3s;
+    border: none;
+    box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.5);
   }
 
-  .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 25px rgba(13, 148, 136, 0.4);
+  .btn-submit:hover:not(:disabled) {
+    background: #14b8a6;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 20px 35px -10px rgba(20, 184, 166, 0.6);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 
   @media (max-width: 480px) {
-    .form-card-glass {
-      padding: 1.5rem;
-    }
-    .checkout-header h1 {
-      font-size: 1.8rem;
-    }
-    .form-footer {
-        grid-template-columns: 1fr;
-    }
+    .form-card-glass { padding: 2rem 1.5rem; }
+    .form-footer { grid-template-columns: 1fr; }
     .btn-back { order: 2; }
     .btn-submit { order: 1; }
   }
