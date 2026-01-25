@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/PlanTrip.css"
+import "../styles/PlanTrip.css";
 
 const PLAN_TILES = [
-  { id: "mini", label: "1N 2D" },
-  { id: "short", label: "2N 3D" },
-  { id: "classic", label: "3N 4D" },
-  { id: "long", label: "4N 5D" },
-  { id: "weekend", label: "Weekend" },
-  { id: "relaxed", label: "Relaxed" },
+  { id: "mini", label: "1N 2D", accent: "amber" },
+  { id: "short", label: "2N 3D", accent: "sky" },
+  { id: "classic", label: "3N 4D",accent: "teal" },
+  { id: "long", label: "4N 5D", accent: "indigo" },
+  { id: "weekend", label: "Weekend", accent: "rose" },
+  { id: "relaxed", label: "Relaxed", accent: "emerald" },
 ];
 
 export default function PlanTrip() {
@@ -40,10 +40,16 @@ export default function PlanTrip() {
                   "focus:outline-none focus:ring-2 focus:ring-[rgba(11,163,127,0.35)]",
                 ].join(" ")}
               >
-                <div className="plan-tile__bg" aria-hidden="true" />
-                <div className="relative p-6 h-full grid place-items-center">
-                  <span className="plan-tile__label">{tile.label}</span>
-                </div>
+                <Link
+                  to={`/plan-trip/${tile.id}`}
+                  className={`plan-tile group plan-tile--${tile.accent}`}
+                >
+                  <div className="plan-tile__glare" />
+                  <div className="relative z-10 h-full flex flex-col items-center justify-center p-6">
+                    <span className="plan-tile__label">{tile.label}</span>
+                    <div className="plan-tile__status">View Package</div>
+                  </div>
+                </Link>
               </Link>
             </li>
           ))}

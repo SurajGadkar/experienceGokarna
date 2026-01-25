@@ -1,118 +1,171 @@
 @import "tailwindcss";
 
 @layer components {
+  /* 1. Radiant Main Container */
   .main-content {
-  
     min-height: 80vh;
     position: relative;
-    background-image: url('../assets/2ndBanner.jpg');
+    /* Combines a bright white wash, colorful radial glows, and your image */
+    background: 
+      linear-gradient(120deg, rgba(255, 255, 255, 0.4) 0%, transparent 60%),
+      radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.25) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.25) 0, transparent 50%),
+      url('../assets/2ndBanner.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
   }
 
-  /* Content stays above background */
-  .main-content > * {
-    position: relative;
-    z-index: 2;
-  }
-
+  /* 2. Crystal Clear Typography */
   .plan-title {
-    color: var(--sand-beige) !important;
-    text-shadow: 0 6px 18px rgba(0,0,0,0.5);
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    background: linear-gradient(135deg, var(--sand-beige) 0%, rgba(254,252,191,0.8) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #0f172a !important; /* Deep navy for sharp contrast */
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-shadow: 0 10px 40px rgba(255, 255, 255, 1); /* White glow behind text */
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-align: center;
   }
 
   .plan-subtitle {
-    color: rgba(254,252,191,0.95) !important;
-    font-size: 1.2rem;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    color: #1e293b !important;
+    font-weight: 700;
+    font-size: 1.15rem;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 8px 24px;
+    border-radius: 100px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
   }
 
+  /* 3. The "Vibrant Crystal" Tile */
   .plan-tile {
     position: relative;
-  background: rgba(15, 23, 42, ); /* 90% transparent */
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
-  border: 1px solid rgba(254,252,191,0.15);
-  box-shadow: 
-    0 18px 55px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(254,252,191,0.08);
-    min-height: 140px;
+    /* Light base color to prevent a "dirty/dull" look */
+    background: rgba(255, 255, 255, 0.2); 
+    
+    /* Extreme saturation pulls colors from the background image */
+    backdrop-filter: blur(25px) saturate(250%) brightness(1.1);
+    -webkit-backdrop-filter: blur(25px) saturate(250%) brightness(1.1);
+    
+    /* Bright white "rim" border */
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    border-radius: 40px;
+    
+    /* Soft shadows and inner glass glow */
+    box-shadow: 
+      0 20px 40px -10px rgba(0, 0, 0, 0.1),
+      inset 0 0 25px rgba(255, 255, 255, 0.4);
+      
+    min-height: 180px;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
   }
 
-  @media (min-width: 768px) {
-    .plan-tile { min-height: 170px; }
-  }
-
+  /* 4. Hover: Lift and Glow */
   .plan-tile:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: var(--sand-beige);
+    transform: translateY(-15px) scale(1.03);
+    background: rgba(255, 255, 255, 0.4);
+    border-color: #ffffff;
     box-shadow: 
-      0 35px 90px rgba(0,0,0,0.6),
-      0 0 0 1px rgba(254,252,191,0.2),
-      inset 0 1px 0 rgba(254,252,191,0.15);
+      0 35px 70px rgba(0, 0, 0, 0.15),
+      0 0 30px rgba(255, 255, 255, 0.6);
   }
 
-  .plan-tile__bg {
+  /* 5. Internal Color Blobs (Fixes the dullness) */
+  /* This creates an internal glow that matches the tile's accent */
+  .plan-tile::before {
+    content: '';
     position: absolute;
-    inset: 0;
-    pointer-events: none;
-    transition: opacity .3s ease;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, var(--glow-color, rgba(255,255,255,0.4)) 0%, transparent 70%);
+    filter: blur(20px);
+    opacity: 0.2;
+    z-index: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
 
-  .plan-tile:hover .plan-tile__bg { 
-    opacity: 1; 
+  .plan-tile:hover::before {
+    opacity: 0.6;
+    transform: scale(1.5);
   }
 
+  /* Accent Mapping */
+  .plan-tile--amber { --glow-color: #fbbf24; }
+  .plan-tile--sky { --glow-color: #38bdf8; }
+  .plan-tile--teal { --glow-color: #2dd4bf; }
+  .plan-tile--rose { --glow-color: #fb7185; }
+  .plan-tile--emerald { --glow-color: #34d399; }
+  .plan-tile--indigo { --glow-color: #818cf8; }
+
+  /* 6. Typography - Bright & Bold */
   .plan-tile__label {
-    color: var(--sand-beige) !important;
+    color: #0f172a !important; /* Dark text for readability on bright glass */
     font-weight: 900;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: clamp(1.05rem, 2.4vw, 1.6rem);
-    padding: 16px 24px;
-    border-radius: 999px;
-    background: rgba(254,252,191,0.15);
-    border: 1px solid rgba(254,252,191,0.20);
-    backdrop-filter: blur(20px);
-    box-shadow: 
-      inset 0 1px 0 rgba(255,255,255,0.15),
-      0 4px 20px rgba(0,0,0,0.3);
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    position: relative;
+    font-size: 1.5rem;
+    z-index: 10;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease;
+  }
+
+  .plan-tile:hover .plan-tile__label {
+    transform: scale(1.1);
+  }
+
+  /* Background Icon Styling */
+  .plan-tile__icon-bg {
+    position: absolute;
+    font-size: 6rem;
+    opacity: 0.15;
+    filter: drop-shadow(0 0 15px white);
+    transition: all 0.6s ease;
     z-index: 2;
   }
 
-  /* Accent hover colors */
-  .plan-tile--teal:hover { 
-    border-color: var(--turquoise-sea);
-    box-shadow: 0 0 0 1px var(--turquoise-sea); 
+  .plan-tile:hover .plan-tile__icon-bg {
+    opacity: 0.4;
+    transform: scale(1.4) rotate(12deg);
   }
-  .plan-tile--sky:hover { 
-    border-color: rgba(14,165,233,0.6);
-    box-shadow: 0 0 0 1px rgba(14,165,233,0.4); 
+
+  /* 7. The Light Sweep (Reflection) */
+  .plan-tile::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -150%;
+    width: 100%;
+    height: 300%;
+    background: linear-gradient(
+      120deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.5), 
+      transparent
+    );
+    transform: rotate(25deg);
+    transition: none;
+    pointer-events: none;
   }
-  .plan-tile--indigo:hover { 
-    border-color: rgba(99,102,241,0.6);
-    box-shadow: 0 0 0 1px rgba(99,102,241,0.4); 
+
+  .plan-tile:hover::after {
+    left: 150%;
+    transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .plan-tile--slate:hover { 
-    border-color: var(--ocean-navy);
-    box-shadow: 0 0 0 1px var(--ocean-navy); 
-  }
-  .plan-tile--amber:hover { 
-    border-color: rgba(245,158,11,0.6);
-    box-shadow: 0 0 0 1px rgba(245,158,11,0.4); 
-  }
-  .plan-tile--rose:hover { 
-    border-color: rgba(244,63,94,0.6);
-    box-shadow: 0 0 0 1px rgba(244,63,94,0.4); 
-  }
+
+  /* Specific Outer Glows on Hover */
+  .plan-tile--amber:hover { box-shadow: 0 25px 50px rgba(245, 158, 11, 0.3); }
+  .plan-tile--sky:hover { box-shadow: 0 25px 50px rgba(14, 165, 233, 0.3); }
+  .plan-tile--teal:hover { box-shadow: 0 25px 50px rgba(20, 184, 166, 0.3); }
 }
