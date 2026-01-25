@@ -1,95 +1,89 @@
-/* Floating WhatsApp Button - LEFT BOTTOM */
+/* Container-less stacking logic */
 .whatsapp-float {
   position: fixed;
   left: 20px;
   bottom: 20px;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   background-color: #25D366;
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 999;
-  transition: all 0.3s ease;
+  font-size: 28px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   text-decoration: none;
 }
 
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.whatsapp-float i {
-  margin-top: 2px;
-}
-
-/* PlanTrip Rectangular Button - LEFT (above WhatsApp) */
+/* Updated Docked Sidebar Button */
 .plantrip-float {
   position: fixed;
-  left: 20px;           /* Same left as WhatsApp */
-  bottom: 95px;         /* Above WhatsApp (20px + 60px height + 15px gap) */
-  width: 120px;         /* Rectangular width */
-  height: 48px;         /* Rectangular height */
-  background: linear-gradient(135deg, var(--turquoise-sea, #0f766e), #115e59);
-  border: none;
-  border-radius: 24px;  /* Rounded rectangle */
+  left: 0;                /* Start at the edge */
+  transform: translateX(-15px); /* Hide part of it naturally */
+  bottom: 95px;
+  width: 95px;
+  height: 48px;
+  background: rgba(15, 118, 110, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  border-radius: 0 24px 24px 0; 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: none;
+
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Better centering */
+  padding-left: 10px;      /* Offset for the hidden part */
+  
   color: white;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  box-shadow: 
-    0 8px 25px rgba(15, 118, 110, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
-  animation: floatPulse 2s ease-in-out infinite;
-  text-align: center;
-  padding: 0 8px;
+  transition: all 0.4s ease;
+  overflow: hidden;        /* Keeps the shine and plane inside the clip */
 }
 
 .plantrip-float:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 
-    0 15px 35px rgba(15, 118, 110, 0.5),
-    0 0 0 1px rgba(255,255,255,0.3);
-  background: linear-gradient(135deg, #0d9488, #0f766e);
+  transform: translateX(0); /* Slide in fully */
+  background: #115e59;
+  width: 115px;
+  padding-left: 0;
+  box-shadow: 8px 0 25px rgba(15, 118, 110, 0.3);
 }
 
-.plantrip-float:active {
-  transform: scale(0.98);
+/* The Plane Animation Fix */
+.plantrip-float span {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
 }
 
-/* Floating pulse animation */
-@keyframes floatPulse {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-2px); }
+.plantrip-float:hover span {
+  animation: planeWiggle 0.5s ease-in-out infinite alternate;
 }
 
-/* Responsive - Adjust on mobile */
-@media (max-width: 640px) {
-  .plantrip-float {
-    left: 16px;
-    bottom: 90px;
-    width: 100px;
-    height: 42px;
-    font-size: 0.85rem;
-    border-radius: 20px;
-  }
-  
-  .whatsapp-float {
-    left: 16px;
-    bottom: 16px;
-    width: 56px;
-    height: 56px;
-    font-size: 28px;
-  }
+@keyframes planeWiggle {
+  from { transform: translate(0, 0); }
+  to { transform: translate(5px, -3px); }
+}
+
+/* Shine effect */
+.plantrip-float::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.6s;
+}
+
+.plantrip-float:hover::after {
+  left: 100%;
 }

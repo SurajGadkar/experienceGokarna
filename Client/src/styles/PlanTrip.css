@@ -2,8 +2,8 @@
 
 @layer components {
   .main-content {
-    margin-bottom: 10vh;
-    min-height: 100vh;
+  
+    min-height: 80vh;
     position: relative;
     background-image: url('../assets/2ndBanner.jpg');
     background-size: cover;

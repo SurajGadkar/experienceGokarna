@@ -27,18 +27,26 @@ function App() {
           <Route path="/activities" element={<Activities />} />
           <Route path="/plan-trip" element={<PlanTrip />} />
           <Route path="/plan-trip/:planId" element={<Trip />} />
-          <Route path="/plan-trip/:planId/details" element={<TripDetailsForm />} />
+          <Route
+            path="/plan-trip/:planId/details"
+            element={<TripDetailsForm />}
+          />
         </Routes>
       </main>
-     {/* 1. PlanTrip Rectangle - LEFT TOP (above WhatsApp) */}
-<Link to="/plan-trip" className="plantrip-float" title="Plan Your Trip">
-  Plan ✈️
-</Link>
+      {/* 1. PlanTrip Rectangle - LEFT TOP (above WhatsApp) */}
+      <a className="plantrip-float" href="/plan-trip">
+        Plan <span>✈️</span>
+      </a>
 
-{/* 2. WhatsApp Circle - LEFT BOTTOM (KEEP EXISTING) */}
-<a href="https://wa.me/9742781642" className="whatsapp-float" target="_blank" rel="noopener noreferrer">
-  <i className="fab fa-whatsapp"></i>
-</a>
+      {/* 2. WhatsApp Circle - LEFT BOTTOM (KEEP EXISTING) */}
+      <a
+        href="https://wa.me/9742781642"
+        className="whatsapp-float"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fab fa-whatsapp"></i>
+      </a>
       <Footer />
     </>
   );
