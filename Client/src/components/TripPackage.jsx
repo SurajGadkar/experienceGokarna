@@ -43,32 +43,45 @@ const TripPlanner = ({ planId }) => {
   const navigate = useNavigate();
 
   const updateSelection = (category, option) => {
-  if (category === "activities") {
-    setSelections((prev) => {
-      const currentActivities = prev.activities || [];
-      const isSelected = currentActivities.some((sel) => sel.id === option.id);
-      
-      let newActivities;
-      if (isSelected) {
-        newActivities = currentActivities.filter((sel) => sel.id !== option.id);
-      } else {
-        newActivities = [...currentActivities, option];
-      }
-      
-      return { ...prev, activities: newActivities };
-    });
-  } else {
-    setSelections((prev) => ({
-      ...prev,
-      [category]: prev[category]?.id === option.id ? null : option,
-    }));
-  }
-};
+    if (category === "activities") {
+      setSelections((prev) => {
+        const currentActivities = prev.activities || [];
+        const isSelected = currentActivities.some(
+          (sel) => sel.id === option.id,
+        );
+
+        let newActivities;
+        if (isSelected) {
+          newActivities = currentActivities.filter(
+            (sel) => sel.id !== option.id,
+          );
+        } else {
+          newActivities = [...currentActivities, option];
+        }
+
+        return { ...prev, activities: newActivities };
+      });
+    } else {
+      setSelections((prev) => ({
+        ...prev,
+        [category]: prev[category]?.id === option.id ? null : option,
+      }));
+    }
+  };
 
   const nextStep = () => {
-    navigate(`/plan-trip/${planId}/details`, {
-      state: { selections },
-    });
+    const tabs = Object.keys(config);
+    const currentIndex = tabs.indexOf(activeTab);
+
+    // If we aren't on the last tab, just move to the next tab
+    if (currentIndex < tabs.length - 1) {
+      setActiveTab(tabs[currentIndex + 1]);
+    } else {
+      // If we ARE on the last tab, navigate to the next page
+      navigate(`/plan-trip/${planId}/details`, {
+        state: { selections },
+      });
+    }
   };
 
   const config = ACTIVITY_CONFIG;
@@ -99,7 +112,9 @@ const TripPlanner = ({ planId }) => {
             <span className="selection-count">
               {activeTab === "activities"
                 ? `${selections.activities?.length || 0}/4 selected`
-                : selections[activeTab] ? "✓ Selected" : "Select one"}
+                : selections[activeTab]
+                  ? "✓ Selected"
+                  : "Select one"}
             </span>
           </div>
 
@@ -136,7 +151,7 @@ const TripPlanner = ({ planId }) => {
               style={{
                 width: `${
                   (Object.values(selections).filter(Boolean).length /
-                    (Object.keys(config).length)) *
+                    Object.keys(config).length) *
                   100
                 }%`,
               }}
@@ -145,9 +160,9 @@ const TripPlanner = ({ planId }) => {
           <button
             className="next-btn"
             onClick={nextStep}
-            disabled={!selections.stay && !selections.transport && selections.activities.length === 0}
+            disabled={activeTab !== "activities" && !selections[activeTab]} // Disable if current tab isn't filled
           >
-            Next: Review Plan
+            {activeTab === "activities" ? "Review Plan" : "Next Step"}
           </button>
         </div>
       </div>
